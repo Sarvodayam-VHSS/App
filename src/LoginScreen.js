@@ -14,7 +14,7 @@ const LoginScreen = () => {
   useEffect(() => {
     const loadFonts = async () => {
       await Font.loadAsync({
-        'poppins-medium': require('../src/Poppins-Medium.ttf'),
+        'poppins-medium': require('./src/Poppins-Medium.ttf'),
       });
       setFontLoaded(true);
     };
