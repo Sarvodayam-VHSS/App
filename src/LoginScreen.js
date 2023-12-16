@@ -1,18 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome'; // Import the necessary icon
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
+import * as Font from 'expo-font';
 
 const LoginScreen = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [fontLoaded, setFontLoaded] = useState(false);
   const navigation = useNavigation();
 
+  useEffect(() => {
+    const loadFonts = async () => {
+      await Font.loadAsync({
+        'poppins-medium': require('../src/Poppins-Medium.ttf'),
+      });
+      setFontLoaded(true);
+    };
+
+    loadFonts();
+  }, []);
+
   const handleLogin = () => {
-    // Perform login logic here
     if (username && password) {
-      // Successful login, navigate to the Home screen and reset the navigation state
       navigation.reset({
         index: 0,
         routes: [{ name: 'Home' }],
@@ -23,9 +34,13 @@ const LoginScreen = () => {
   };
 
   const handleNavigateToRegistration = () => {
-    // Navigate to the registration screen
     navigation.navigate('Register');
   };
+
+  if (!fontLoaded) {
+    // Return a loading indicator or null while the font is being loaded
+    return null;
+  }
 
   return (
     <ImageBackground
@@ -37,13 +52,9 @@ const LoginScreen = () => {
         <View style={styles.loginBox}>
           <Text style={styles.title}>Login</Text>
           <View style={styles.profileContainer}>
-            {/* Profile section */}
             <View style={styles.profile}>
-              {/* Add profile icon */}
               <Icon name="user" size={40} color="black" />
-              {/* Profile information */}
               <Text style={styles.profileText}>Welcome, User!</Text>
-              {/* You can add more details or components here */}
             </View>
           </View>
           <TextInput
@@ -91,7 +102,7 @@ const styles = StyleSheet.create({
     height: 400,
     padding: 40,
     borderRadius: 25,
-    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    backgroundColor: 'rgba(255, 255, 255, 1)',
     borderColor: 'blue',
     borderWidth: 2,
     shadowColor: '#000',
@@ -122,10 +133,6 @@ const styles = StyleSheet.create({
   error: {
     color: 'red',
     marginBottom: 10,
-  },
-  newUserButton: {
-    color: 'blue',
-    marginTop: 10,
   },
   buttonContainer: {
     flexDirection: 'row',
