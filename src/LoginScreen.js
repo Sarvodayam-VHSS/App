@@ -37,11 +37,6 @@ const LoginScreen = () => {
     navigation.navigate('Register');
   };
 
-  if (!fontLoaded) {
-    // Return a loading indicator or null while the font is being loaded
-    return null;
-  }
-
   return (
     <ImageBackground
       source={require('../assets/bg.jpg')}
