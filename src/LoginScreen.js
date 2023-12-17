@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 import * as Font from 'expo-font';
@@ -8,22 +8,23 @@ const LoginScreen = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [fontLoaded, setFontLoaded] = useState(false);
   const navigation = useNavigation();
 
   useEffect(() => {
+    // Load the 'Poppins' font
     const loadFonts = async () => {
       await Font.loadAsync({
-        'poppins-medium': require('./src/Poppins-Medium.ttf'),
+        'poppins-medium': require('./Poppins-Medium.ttf'), // Adjust the path here
       });
-      setFontLoaded(true);
     };
 
     loadFonts();
   }, []);
 
   const handleLogin = () => {
+    // Perform login logic here
     if (username && password) {
+      // Successful login, navigate to the Home screen and reset the navigation state
       navigation.reset({
         index: 0,
         routes: [{ name: 'Home' }],
@@ -34,6 +35,7 @@ const LoginScreen = () => {
   };
 
   const handleNavigateToRegistration = () => {
+    // Navigate to the registration screen
     navigation.navigate('Register');
   };
 
@@ -45,21 +47,15 @@ const LoginScreen = () => {
     >
       <View style={styles.container}>
         <View style={styles.loginBox}>
-          <Text style={styles.title}>Login</Text>
-          <View style={styles.profileContainer}>
-            <View style={styles.profile}>
-              <Icon name="user" size={40} color="black" />
-              <Text style={styles.profileText}>Welcome, User!</Text>
-            </View>
-          </View>
+          <Text style={[styles.title, { fontFamily: 'poppins-medium' }]}>Login</Text>
           <TextInput
-            style={[styles.input, styles.roundedInput]}
-            placeholder="Email"
+            style={styles.input}
+            placeholder="Username"
             value={username}
             onChangeText={setUsername}
           />
           <TextInput
-            style={[styles.input, styles.roundedInput]}
+            style={styles.input}
             placeholder="Password"
             secureTextEntry
             value={password}
@@ -122,9 +118,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingLeft: 10,
   },
-  roundedInput: {
-    borderRadius: 20,
-  },
   error: {
     color: 'red',
     marginBottom: 10,
@@ -147,18 +140,6 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     height: '100%',
-  },
-  profileContainer: {
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  profile: {
-    alignItems: 'center',
-  },
-  profileText: {
-    marginTop: 10,
-    fontSize: 16,
-    color: 'black',
   },
 });
 
