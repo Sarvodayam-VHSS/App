@@ -48,9 +48,10 @@ const LoginScreen = () => {
       <View style={styles.container}>
         <View style={styles.loginBox}>
           <Text style={[styles.title, { fontFamily: 'poppins-medium' }]}>Login</Text>
+          <Icon name="user" size={40} color="black" style={styles.profileIcon} />
           <TextInput
             style={styles.input}
-            placeholder="Username"
+            placeholder="Email"
             value={username}
             onChangeText={setUsername}
           />
@@ -93,21 +94,22 @@ const styles = StyleSheet.create({
     height: 400,
     padding: 40,
     borderRadius: 25,
-    backgroundColor: 'rgba(255, 255, 255, 1)',
+    backgroundColor: 'rgba(255, 255, 255, 0.8)', // Set the alpha (fourth parameter) to control transparency
     borderColor: 'blue',
     borderWidth: 2,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.8,
-    shadowRadius: 4,
+    shadowOpacity: 1,
+    shadowRadius: 5,
     elevation: 5,
+    alignItems: 'center', // Center the items inside the login box
   },
   title: {
     textAlign: 'center',
     fontSize: 24,
     color: 'black',
     fontWeight: 'bold',
-    marginBottom: 30,
+    marginBottom: 10, // Adjusted margin to separate the title and icon
     fontFamily: 'poppins-medium',
   },
   input: {
@@ -117,6 +119,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 10,
     paddingLeft: 10,
+    borderRadius: 15, // Add this line to make the input boxes rounded
   },
   error: {
     color: 'red',
@@ -126,6 +129,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 10,
+    width: '100%', // Make sure the buttons take the full width
   },
   button: {
     borderRadius: 20,
@@ -140,6 +144,9 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     height: '100%',
+  },
+  profileIcon: {
+    marginBottom: 20, // Add margin to separate the icon from the email input
   },
 });
 
