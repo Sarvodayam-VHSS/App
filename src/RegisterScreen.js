@@ -1,6 +1,6 @@
 // RegisterScreen.js
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ImageBackground, StyleSheet } from 'react-native';
 
 const RegisterScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
@@ -40,64 +40,44 @@ const RegisterScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Register</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Confirm Password"
-        secureTextEntry
-        value={confirmPassword}
-        onChangeText={setConfirmPassword}
-      />
-      {error ? <Text style={styles.error}>{error}</Text> : null}
-      <Button title="Register" onPress={handleRegister} />
-      <Text style={styles.loginLink} onPress={navigateToLogin}>
-        Already have an account? Login
-      </Text>
-    </View>
+    <ImageBackground
+      source={require('../assets/bg.jpg')} // Replace with the actual path to your image
+      style={styles.backgroundImage}
+    >
+      <View style={styles.container}>
+        <TouchableOpacity
+          style={[styles.button, { backgroundColor: 'blue' }]}
+          onPress={handleRegister}
+        >
+          <Text style={[styles.buttonText, { color: 'white' }]}>Register</Text>
+        </TouchableOpacity>
+      </View>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover', // or 'stretch'
+    justifyContent: 'center',
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  title: {
-    fontSize: 24,
+  button: {
+    backgroundColor: 'blue',
+    padding: 10,
+    borderRadius: 20, // Adjust the value to change the roundness of the edges
+    width: '80%', // Adjust the value to extend or reduce the width
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 20,
-  },
-  input: {
-    height: 40,
-    width: '80%',
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 10,
-    paddingLeft: 10,
-  },
-  error: {
-    color: 'red',
-    marginBottom: 10,
-  },
-  loginLink: {
-    marginTop: 20,
-    color: 'blue',
-    textDecorationLine: 'underline',
+    textAlign: 'center',
   },
 });
 
