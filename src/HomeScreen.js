@@ -60,6 +60,10 @@ const HomeScreen = () => {
       case 'Others':
         navigation.navigate('Others');
         break;
+      case 'Professional':
+        navigation.navigate('Professional');
+
+        break;
       default:
         navigation.navigate(item.value);
         break;

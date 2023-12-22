@@ -3,17 +3,17 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 const HomeServ = () => {
-  const otherButtons = [
-    { label: 'Education', value: 'education' },
-    { label: 'Healthcare', value: 'healthcare' },
-    { label: 'Technology', value: 'technology' },
-    { label: 'Finance', value: 'finance' },
-    { label: 'Entertainment', value: 'entertainment' },
-    { label: 'Travel', value: 'travel' },
-    { label: 'Sports', value: 'sports' },
-    { label: 'Fashion', value: 'fashion' },
-    { label: 'Food', value: 'food' },
-    { label: 'Events', value: 'events' },
+  const agriculturalButtons = [
+    { label: 'Crop Management', value: 'cropManagement' },
+    { label: 'Livestock Care', value: 'livestockCare' },
+    { label: 'Soil Analysis', value: 'soilAnalysis' },
+    { label: 'Irrigation', value: 'irrigation' },
+    { label: 'Harvesting Tips', value: 'harvestingTips' },
+    { label: 'Farm Equipment', value: 'farmEquipment' },
+    { label: 'Pest Control', value: 'pestControl' },
+    { label: 'Organic Farming', value: 'organicFarming' },
+    { label: 'Marketplace', value: 'marketplace' },
+    { label: 'Weather Forecast', value: 'weatherForecast' },
   ];
 
   const handleButtonPress = (item) => {
@@ -23,11 +23,11 @@ const HomeServ = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Explore by Category</Text>
+      <Text style={styles.text}>agricultural</Text>
 
-      {/* Render other theme buttons */}
+      {/* Render agricultural theme buttons */}
       <View style={styles.buttonContainer}>
-        {otherButtons.map((item) => (
+        {agriculturalButtons.map((item) => (
           <TouchableOpacity
             key={item.value}
             style={styles.button}
@@ -58,11 +58,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
-    backgroundColor: '#3498db', // Use your preferred color
+    backgroundColor: '#6DB33F', // Use your preferred color
     padding: 15,
     marginVertical: 10,
     width: '100%',
-    borderRadius: 25, // Modified to a circular button
+    borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',
   },
