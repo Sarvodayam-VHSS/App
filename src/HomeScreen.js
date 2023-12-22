@@ -46,7 +46,10 @@ const HomeScreen = () => {
         navigation.navigate('Reminders');
         break;
       case 'option4':
-        navigation.navigate('AboutUs');
+        navigation.navigate('Aboutus');
+        break;
+      case 'option5':
+        navigation.navigate('Contact');
         break;
       case 'option6':
         navigation.reset({

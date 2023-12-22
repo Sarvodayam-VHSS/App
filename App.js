@@ -13,6 +13,7 @@ import Aboutus from './src/Aboutus';
 import Agric from './src/Agric';
 import Others from './src/Others';
 import Professional from './src/Professional';
+import Contact from './src/Contact';
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -82,6 +83,12 @@ const App = () => {
           component={Professional}
           // You might want to customize the header for the login screen
           options={{ title: 'Professional' }}
+        />
+        <Stack.Screen
+          name="Contact"
+          component={Contact}
+          // You might want to customize the header for the login screen
+          options={{ title: 'Contact' }}
         />
         {/* Add other screens here */}
       </Stack.Navigator>
