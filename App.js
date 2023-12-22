@@ -70,6 +70,12 @@ const App = () => {
           // You might want to customize the header for the login screen
           options={{ title: 'Agric' }}
         />
+        <Stack.Screen
+          name="Others"
+          component={Others}
+          // You might want to customize the header for the login screen
+          options={{ title: 'Others' }}
+        />
         {/* Add other screens here */}
       </Stack.Navigator>
     </NavigationContainer>
