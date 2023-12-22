@@ -57,6 +57,9 @@ const HomeScreen = () => {
       case 'Agric': // Corrected to match the value in gridItems
         navigation.navigate('Agric');
         break;
+      case 'Others':
+        navigation.navigate('Others');
+        break;
       default:
         navigation.navigate(item.value);
         break;
