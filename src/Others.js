@@ -3,17 +3,19 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 const HomeServ = () => {
-  const otherButtons = [
-    { label: 'Education', value: 'education' },
-    { label: 'Healthcare', value: 'healthcare' },
-    { label: 'Technology', value: 'technology' },
-    { label: 'Finance', value: 'finance' },
-    { label: 'Entertainment', value: 'entertainment' },
-    { label: 'Travel', value: 'travel' },
-    { label: 'Sports', value: 'sports' },
-    { label: 'Fashion', value: 'fashion' },
-    { label: 'Food', value: 'food' },
-    { label: 'Events', value: 'events' },
+  const maintenanceButtons = [
+    { label: 'A/C', value: 'airConditioning' },
+    { label: 'Fridge', value: 'fridge' },
+    { label: 'Well', value: 'well' },
+    { label: 'CCTV', value: 'cctv' },
+    { label: 'Computer', value: 'computer' },
+    { label: 'Mobile', value: 'mobile' },
+    { label: 'Aluminium', value: 'aluminium' },
+    { label: 'Tile', value: 'tile' },
+    { label: 'Welding', value: 'welding' },
+    { label: 'Workshop', value: 'workshop' },
+    { label: 'Paint', value: 'paint' },
+    { label: 'All Other', value: 'allOther' },
   ];
 
   const handleButtonPress = (item) => {
@@ -23,11 +25,11 @@ const HomeServ = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Explore by Category</Text>
+      <Text style={styles.text}>Maintenance Services</Text>
 
-      {/* Render other theme buttons */}
+      {/* Render maintenance theme buttons */}
       <View style={styles.buttonContainer}>
-        {otherButtons.map((item) => (
+        {maintenanceButtons.map((item) => (
           <TouchableOpacity
             key={item.value}
             style={styles.button}
@@ -58,11 +60,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
-    backgroundColor: '#3498db', // Use your preferred color
+    backgroundColor: '#001F3F', // Dark Blue
     padding: 15,
     marginVertical: 10,
     width: '100%',
-    borderRadius: 25, // Modified to a circular button
+    borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',
   },
