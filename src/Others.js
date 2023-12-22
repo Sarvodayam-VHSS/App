@@ -3,19 +3,17 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 const HomeServ = () => {
-  const maintenanceButtons = [
-    { label: 'A/C', value: 'airConditioning' },
-    { label: 'Fridge', value: 'fridge' },
-    { label: 'Well', value: 'well' },
-    { label: 'CCTV', value: 'cctv' },
-    { label: 'Computer', value: 'computer' },
-    { label: 'Mobile', value: 'mobile' },
-    { label: 'Aluminium', value: 'aluminium' },
-    { label: 'Tile', value: 'tile' },
-    { label: 'Welding', value: 'welding' },
-    { label: 'Workshop', value: 'workshop' },
-    { label: 'Paint', value: 'paint' },
-    { label: 'All Other', value: 'allOther' },
+  const agriculturalButtons = [
+    { label: 'Crop Management', value: 'cropManagement' },
+    { label: 'Livestock Care', value: 'livestockCare' },
+    { label: 'Soil Analysis', value: 'soilAnalysis' },
+    { label: 'Irrigation', value: 'irrigation' },
+    { label: 'Harvesting Tips', value: 'harvestingTips' },
+    { label: 'Farm Equipment', value: 'farmEquipment' },
+    { label: 'Pest Control', value: 'pestControl' },
+    { label: 'Organic Farming', value: 'organicFarming' },
+    { label: 'Marketplace', value: 'marketplace' },
+    { label: 'Weather Forecast', value: 'weatherForecast' },
   ];
 
   const handleButtonPress = (item) => {
@@ -25,11 +23,11 @@ const HomeServ = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Maintenance Services</Text>
+      <Text style={styles.text}>agricultural</Text>
 
-      {/* Render maintenance theme buttons */}
+      {/* Render agricultural theme buttons */}
       <View style={styles.buttonContainer}>
-        {maintenanceButtons.map((item) => (
+        {agriculturalButtons.map((item) => (
           <TouchableOpacity
             key={item.value}
             style={styles.button}
@@ -60,7 +58,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
-    backgroundColor: '#001F3F', // Dark Blue
+    backgroundColor: '#6DB33F', // Use your preferred color
     padding: 15,
     marginVertical: 10,
     width: '100%',
