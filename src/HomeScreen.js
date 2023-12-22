@@ -19,15 +19,15 @@ const HomeScreen = () => {
   ];
 
   const gridItems = [
-    { label: 'Home', icon: 'home', value: 'HomeServ' }, // Changed icon to 'home'
-    { label: 'Knowledge', icon: 'book', value: 'Knowledge' }, // Changed icon to 'book'
-    { label: 'Professional', icon: 'briefcase', value: 'Professional' }, // Changed icon to 'briefcase'
-    { label: 'Aware', icon: 'info', value: 'Aware' }, // Changed icon to 'info'
-    { label: 'Counselling', icon: 'phone-square', value: 'Counselling' }, // Changed icon to 'phone-square'
-    { label: 'Vehicle', icon: 'car', value: 'Vehicle' }, // Changed icon to 'car'
-    { label: 'Agri/Vet', icon: 'leaf', value: 'Agric' }, // Changed icon to 'leaf'
-    { label: 'Shopping', icon: 'shopping-cart', value: 'Shopping' }, // Changed icon to 'shopping-cart'
-    { label: 'Others', icon: 'commenting', value: 'Others' }, // Changed icon to 'commenting'
+    { label: 'Home', icon: 'home', value: 'HomeServ' },
+    { label: 'Knowledge', icon: 'book', value: 'Knowledge' },
+    { label: 'Professional', icon: 'briefcase', value: 'Professional' },
+    { label: 'Aware', icon: 'info', value: 'Aware' },
+    { label: 'Counselling', icon: 'phone-square', value: 'Counselling' },
+    { label: 'Vehicle', icon: 'car', value: 'Vehicle' },
+    { label: 'Agri/Vet', icon: 'leaf', value: 'Agric' }, // Corrected value to 'Agric'
+    { label: 'Shopping', icon: 'shopping-cart', value: 'Shopping' },
+    { label: 'Others', icon: 'commenting', value: 'Others' },
   ];
 
   const handleIconPress = () => {
@@ -38,7 +38,6 @@ const HomeScreen = () => {
     setSelectedOption(item.label);
     setDropdownVisible(false);
 
-    // Perform navigation based on the selected option
     switch (item.value) {
       case 'option1':
         navigation.navigate('ToDoList');
@@ -46,13 +45,17 @@ const HomeScreen = () => {
       case 'option2':
         navigation.navigate('Reminders');
         break;
+      case 'option4':
+        navigation.navigate('AboutUs');
+        break;
       case 'option6':
-        // Sign out logic
-        // For simplicity, you can navigate back to the login screen
         navigation.reset({
           index: 0,
           routes: [{ name: 'Login' }],
         });
+        break;
+      case 'Agric': // Corrected to match the value in gridItems
+        navigation.navigate('Agric');
         break;
       default:
         navigation.navigate(item.value);
