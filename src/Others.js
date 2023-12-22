@@ -18,12 +18,12 @@ const HomeServ = () => {
 
   const handleButtonPress = (item) => {
     // Handle button press based on the item value
-    console.log(Button pressed: ${item.label});
+    console.log(`Button pressed: ${item.label}`);
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>agricultural</Text>
+      <Text style={styles.text}>Agricultural</Text>
 
       {/* Render agricultural theme buttons */}
       <View style={styles.buttonContainer}>
