@@ -18,7 +18,7 @@ const HomeServ = () => {
 
   const handleButtonPress = (item) => {
     // Handle button press based on the item value
-    console.log(Button pressed: ${item.label});
+    console.log(`Button pressed: ${item.label}`);
   };
 
   return (
