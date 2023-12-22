@@ -2,8 +2,8 @@ import React from 'react';
 import { View, Text, ImageBackground, Image, StyleSheet } from 'react-native';
 
 const HomeServ = () => {
-  const backgroundImage = require('/assets/abhiss.png');
-  const logo = require('/assets/logo.png');
+  const backgroundImage = require('../assets/abhiss.png');
+  const logo = require('../assets/logo.png');
 
   const inventors = [
     'ABHISHEK P',
