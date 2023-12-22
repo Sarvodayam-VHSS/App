@@ -1,33 +1,48 @@
 // HomeServ.js
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const HomeServ = () => {
-  const agriculturalButtons = [
-    { label: 'Crop Management', value: 'cropManagement' },
-    { label: 'Livestock Care', value: 'livestockCare' },
-    { label: 'Soil Analysis', value: 'soilAnalysis' },
-    { label: 'Irrigation', value: 'irrigation' },
-    { label: 'Harvesting Tips', value: 'harvestingTips' },
-    { label: 'Farm Equipment', value: 'farmEquipment' },
-    { label: 'Pest Control', value: 'pestControl' },
-    { label: 'Organic Farming', value: 'organicFarming' },
-    { label: 'Marketplace', value: 'marketplace' },
-    { label: 'Weather Forecast', value: 'weatherForecast' },
+  const maintenanceButtons = [
+    { label: 'A/C', value: 'airConditioning' },
+    { label: 'Fridge', value: 'fridge' },
+    { label: 'Well', value: 'well' },
+    { label: 'CCTV', value: 'cctv' },
+    { label: 'Computer', value: 'computer' },
+    { label: 'Mobile', value: 'mobile' },
+    { label: 'Aluminium', value: 'aluminium' },
+    { label: 'Tile', value: 'tile' },
+    { label: 'Welding', value: 'welding' },
+    { label: 'Workshop', value: 'workshop' },
+    { label: 'Paint', value: 'paint' },
+    { label: 'All Other', value: 'allOther' },
   ];
+
+  const navigation = useNavigation();
 
   const handleButtonPress = (item) => {
     // Handle button press based on the item value
     console.log(`Button pressed: ${item.label}`);
+
+    switch (item.value) {
+      case 'airConditioning':
+        navigation.navigate('ACScreen'); // Replace 'ACScreen' with the actual screen name in ac.js
+        break;
+      // Add cases for other buttons if needed
+      default:
+        // Handle default case
+        break;
+    }
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>agricultural</Text>
+      <Text style={styles.text}>Other Services</Text>
 
-      {/* Render agricultural theme buttons */}
+      {/* Render maintenance theme buttons */}
       <View style={styles.buttonContainer}>
-        {agriculturalButtons.map((item) => (
+        {maintenanceButtons.map((item) => (
           <TouchableOpacity
             key={item.value}
             style={styles.button}
@@ -58,11 +73,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
-    backgroundColor: '#6DB33F', // Use your preferred color
+    backgroundColor: '#004080', // Darker Blue
     padding: 15,
     marginVertical: 10,
     width: '100%',
-    borderRadius: 8,
+    borderRadius: 20, // Make the buttons rounder
     justifyContent: 'center',
     alignItems: 'center',
   },
