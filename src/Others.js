@@ -3,17 +3,18 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 const HomeServ = () => {
-  const agriculturalButtons = [
-    { label: 'Crop Management', value: 'cropManagement' },
-    { label: 'Livestock Care', value: 'livestockCare' },
-    { label: 'Soil Analysis', value: 'soilAnalysis' },
-    { label: 'Irrigation', value: 'irrigation' },
-    { label: 'Harvesting Tips', value: 'harvestingTips' },
-    { label: 'Farm Equipment', value: 'farmEquipment' },
-    { label: 'Pest Control', value: 'pestControl' },
-    { label: 'Organic Farming', value: 'organicFarming' },
-    { label: 'Marketplace', value: 'marketplace' },
-    { label: 'Weather Forecast', value: 'weatherForecast' },
+  const serviceButtons = [
+    { label: 'A/C Fridge', value: 'acFridge' },
+    { label: 'Well', value: 'well' },
+    { label: 'CCTV', value: 'cctv' },
+    { label: 'Computer', value: 'computer' },
+    { label: 'Mobile', value: 'mobile' },
+    { label: 'Aluminium', value: 'aluminium' },
+    { label: 'Tile', value: 'tile' },
+    { label: 'Welding', value: 'welding' },
+    { label: 'Workshop', value: 'workshop' },
+    { label: 'Paint', value: 'paint' },
+    { label: 'All Other', value: 'allOther' },
   ];
 
   const handleButtonPress = (item) => {
@@ -23,14 +24,14 @@ const HomeServ = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Agricultural</Text>
+      <Text style={styles.text}>Other Services</Text>
 
-      {/* Render agricultural theme buttons */}
+      {/* Render service theme buttons */}
       <View style={styles.buttonContainer}>
-        {agriculturalButtons.map((item) => (
+        {serviceButtons.map((item) => (
           <TouchableOpacity
             key={item.value}
-            style={styles.button}
+            style={[styles.button, { backgroundColor: '#001F3F' }]} // Dark blue color
             onPress={() => handleButtonPress(item)}
           >
             <Text style={styles.buttonText}>{item.label}</Text>
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
-    backgroundColor: '#6DB33F', // Use your preferred color
+    backgroundColor: '#001F3F', // Dark blue color
     padding: 15,
     marginVertical: 10,
     width: '100%',
