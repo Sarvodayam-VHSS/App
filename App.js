@@ -10,7 +10,8 @@ import HomeScreen from './src/HomeScreen';
 import ReminderPage from './src/ReminderPage';
 import HomeServ from './src/HomeServ';
 import Aboutus from './src/Aboutus';
-
+import Agric from './src/Agric';
+import Others from './src/Others';
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -62,6 +63,12 @@ const App = () => {
           component={Aboutus}
           // You might want to customize the header for the login screen
           options={{ title: 'Aboutus' }}
+        />
+        <Stack.Screen
+          name="Agric"
+          component={Agric}
+          // You might want to customize the header for the login screen
+          options={{ title: 'Agric' }}
         />
         {/* Add other screens here */}
       </Stack.Navigator>
