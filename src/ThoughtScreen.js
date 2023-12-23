@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, Button, BackHandler, StyleSheet, ScrollView } from 'react-native';
 import * as Font from 'expo-font';
 
+
 const ThoughtScreen = ({ navigation }) => {
   const [fontLoaded, setFontLoaded] = useState(false);
 
