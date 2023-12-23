@@ -47,7 +47,7 @@ const HomeServ = () => {
             {/* Use the specified icons for each button */}
             {item.icon && <Icon name={item.icon} size={30} color="#001F3F" />}
 
-            <Text style={[styles.buttonText, { fontFamily: 'Poppins-Medium', marginTop: 5, color: '#001F3F' }]}>{item.label}</Text>
+            <Text style={[styles.buttonText, { fontFamily: 'Poppins-Medium', marginTop: 5, color: '#001F3F', textAlign: 'center' }]}>{item.label}</Text>
           </TouchableOpacity>
         ))}
       </View>
