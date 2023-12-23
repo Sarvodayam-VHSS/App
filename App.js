@@ -8,14 +8,16 @@ import LoginScreen from './src/LoginScreen';
 import RegisterScreen from './src/RegisterScreen';
 import HomeScreen from './src/HomeScreen';
 import ReminderPage from './src/ReminderPage';
-import HomeServ from './src/HomeServ'; // Update the path accordingly
+import HomeServ from './src/HomeServ';
 import Aboutus from './src/Aboutus';
 import Agric from './src/Agric';
 import Others from './src/Others';
 import Professional from './src/Professional';
 import Contact from './src/Contact';
-import NewPage from './src/NewPage'; // Update the path accordingly
-import { AppProvider } from './src/AppContext'; // Import the context
+import NewPage from './src/NewPage';
+import ValamPage from './src/agricultural/ValamPage';
+import VehicleScreen from './src/Vehicle'; // Add this import statement
+import { AppProvider } from './src/AppContext';
 
 const Stack = createStackNavigator();
 
@@ -88,6 +90,16 @@ const App = () => {
             name="NewPage"
             component={NewPage}
             options={{ title: 'New Page' }}
+          />
+          <Stack.Screen
+            name="ValamPage"
+            component={ValamPage}
+            options={{ title: 'valam' }}
+          />
+          <Stack.Screen
+            name="Vehicle"
+            component={VehicleScreen}
+            options={{ title: 'Vehicle' }}
           />
           {/* Add other screens here */}
         </Stack.Navigator>

@@ -3,6 +3,17 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+const VehicleScreen = () => {
+  // Add your Vehicle screen content here
+  return (
+    <View style={styles.container}>
+      <Text>Vehicle Screen</Text>
+      {/* Add your Vehicle screen content here */}
+    </View>
+  );
+};
 
 const HomeScreen = () => {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
@@ -15,7 +26,7 @@ const HomeScreen = () => {
     { label: 'Family Budget', value: 'option3' },
     { label: 'About Us', value: 'option4' },
     { label: 'Contact', value: 'option5' },
-    { label: 'Signout', value: 'option6' }
+    { label: 'Signout', value: 'option6' },
   ];
 
   const gridItems = [
@@ -25,7 +36,7 @@ const HomeScreen = () => {
     { label: 'Aware', icon: 'info', value: 'Aware' },
     { label: 'Counselling', icon: 'phone-square', value: 'Counselling' },
     { label: 'Vehicle', icon: 'car', value: 'Vehicle' },
-    { label: 'Agri/Vet', icon: 'leaf', value: 'Agric' }, // Corrected value to 'Agric'
+    { label: 'Agri/Vet', icon: 'leaf', value: 'Agric' },
     { label: 'Shopping', icon: 'shopping-cart', value: 'Shopping' },
     { label: 'Others', icon: 'commenting', value: 'Others' },
   ];
@@ -57,7 +68,7 @@ const HomeScreen = () => {
           routes: [{ name: 'Login' }],
         });
         break;
-      case 'Agric': // Corrected to match the value in gridItems
+      case 'Agric':
         navigation.navigate('Agric');
         break;
       case 'Others':
@@ -65,7 +76,9 @@ const HomeScreen = () => {
         break;
       case 'Professional':
         navigation.navigate('Professional');
-
+        break;
+      case 'Vehicle':
+        navigation.navigate('Vehicle'); // Navigate to the Vehicle.js page
         break;
       default:
         navigation.navigate(item.value);

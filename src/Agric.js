@@ -1,22 +1,23 @@
 // HomeServ.js
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Linking, ImageBackground, ScrollView, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, ScrollView, TextInput, Linking } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 import { useAppContext } from '../src/AppContext'; // Import the context
+import ValamPage from '../src/agricultural/ValamPage'; // Import ValamPage component
 
 const HomeServ = () => {
   const navigation = useNavigation();
   const { newPageData, customButtons, setCustomButtons } = useAppContext(); // Access the saved data
 
   const agricultureButtons = [
-    { label: 'Farm Supplies', value: 'farmSupplies', link: 'https://www.example.com/farm-supplies', icon: 'leaf' },
-    { label: 'Seeds & Fertilizers', value: 'seedsFertilizers', link: 'https://www.example.com/seeds-fertilizers', icon: 'tree'},
-    { label: 'Agri Services', value: 'agriServices', link: 'https://www.example.com/agri-services', icon: 'cogs' },
-    { label: 'Marketplace', value: 'marketplace', link:'https://keralaagriculture.gov.in/en/panchayath-level-organisations/', icon: 'shopping-basket' },
-    { label: 'Weather Forecast', value: 'weatherForecast', link: 'https://www.example.com/weather-forecast', icon: 'sun-o' },
-    { label: 'Research & Education', value: 'researchEducation', link: 'https://www.example.com/agri-research', icon: 'book' },
-    { label: 'Agri Jobs', value: 'agriJobs', link: 'https://www.example.com/agri-jobs', icon: 'briefcase' },
+    { label: 'valam', value: 'valam', link: 'ValamPage' }, // Change link to 'ValamPage'
+    { label: 'Seeds & Fertilizers', value: 'seedsFertilizers', icon: 'tree'},
+    { label: 'Agri Services', value: 'agriServices', icon: 'cogs' },
+    { label: 'Marketplace', value: 'marketplace', link: 'https://keralaagriculture.gov.in/en/panchayath-level-organisations/', icon: 'shopping-basket' },
+    { label: 'Weather Forecast', value: 'weatherForecast', icon: 'sun-o' },
+    { label: 'Research & Education', value: 'researchEducation', icon: 'book' },
+    { label: 'Agri Jobs', value: 'agriJobs', icon: 'briefcase' },
   ];
 
   const quotes = [
@@ -43,8 +44,13 @@ const HomeServ = () => {
   const handleButtonPress = (item) => {
     console.log(`Button pressed: ${item.label}`);
     if (item.link) {
-      console.log(`Redirecting to: ${item.link}`);
-      Linking.openURL(item.link).catch((err) => console.error('Error opening link:', err));
+      if (item.value === 'valam') {
+        navigation.navigate('ValamPage'); // Navigate to ValamPage
+      } else if (item.value === 'marketplace') {
+        Linking.openURL(item.link).catch((err) => console.error('Error opening link:', err));
+      } else {
+        navigation.navigate(item.link); // Navigate to the specified page
+      }
     }
   };
 
