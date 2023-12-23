@@ -15,7 +15,7 @@ const HomeServ = () => {
     { label: 'Edu. Instit.', value: 'eduInstitute', link: 'https://education.kerala.gov.in/', icon: 'ios-book-outline' },
     { label: 'Online Shops', value: 'shops', link: 'https://www.amazon.in/', icon: 'ios-cart-outline' },
     { label: 'Medical Store', value: 'medicalStore', link: 'https://www.quickerala.com/thrissur/healthcare/medical-shops/sbct-5801-dt-13', icon: 'ios-medical-outline' },
-    { label: 'Religious Places', value: 'religiousPlaces', link: 'http://tinyurl.com/religiousplaces', icon: 'ios-star-outline' },
+    { label: 'Religious Place', value: 'religiousPlaces', link: 'http://tinyurl.com/religiousplaces', icon: 'ios-star-outline' },
     { label: 'Hotels', value: 'hotels', link: 'http://tinyurl.com/363e2vau', icon: 'ios-bed-outline' },
     { label: 'Jobs', value: 'jobVacancies', link: 'https://www.google.com/about/careers/applications/jobs/results/?location=India', icon: 'ios-briefcase-outline' },
     { label: 'Media', value: 'media', link: 'https://www.manoramaonline.com/', icon: 'ios-newspaper-outline' },
@@ -57,10 +57,9 @@ const HomeServ = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
+  },  
   text: {
     fontSize: 20,
     fontWeight: 'bold',
@@ -76,7 +75,7 @@ const styles = StyleSheet.create({
   button: {
     padding: 15,
     marginVertical: 10,
-    width: '30%',
+    width: '32%',
     aspectRatio: 1,
     borderRadius: 25,
     justifyContent: 'center',
