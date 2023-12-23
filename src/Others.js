@@ -1,7 +1,7 @@
 // HomeServ.js
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Linking } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons'; // Import the icon library
+import { View, Text, StyleSheet, TouchableOpacity, Linking, ScrollView } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const HomeServ = () => {
   const serviceButtons = [
@@ -33,7 +33,7 @@ const HomeServ = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.text}>Other Services</Text>
 
       {/* Render service theme buttons */}
@@ -51,7 +51,7 @@ const HomeServ = () => {
           </TouchableOpacity>
         ))}
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 16,
     fontWeight: 'bold',
+    textAlign: 'center', // Add this line to align text center
   },
 });
 
