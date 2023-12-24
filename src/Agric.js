@@ -1,23 +1,30 @@
 // HomeServ.js
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, ScrollView, TextInput, Linking } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ImageBackground,
+  ScrollView,
+  Linking,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 import { useAppContext } from '../src/AppContext'; // Import the context
-import ValamPage from '../src/agricultural/ValamPage'; // Import ValamPage component
 
 const HomeServ = () => {
   const navigation = useNavigation();
   const { newPageData, customButtons, setCustomButtons } = useAppContext(); // Access the saved data
 
   const agricultureButtons = [
-    { label: 'valam', value: 'valam', link: 'ValamPage' }, // Change link to 'ValamPage'
-    { label: 'Seeds & Fertilizers', value: 'seedsFertilizers', icon: 'tree'},
-    { label: 'Agri Services', value: 'agriServices', icon: 'cogs' },
+    { label: 'valam', value: 'valam', link: 'ValamPage' ,icon: 'leaf'},
+    { label: 'Seeds', value: 'SeedPage', icon: 'tree' },
+    { label: 'keedanasini', value: 'keedanasini', icon: 'leaf' },
     { label: 'Marketplace', value: 'marketplace', link: 'https://keralaagriculture.gov.in/en/panchayath-level-organisations/', icon: 'shopping-basket' },
     { label: 'Weather Forecast', value: 'weatherForecast', icon: 'sun-o' },
-    { label: 'Research & Education', value: 'researchEducation', icon: 'book' },
-    { label: 'Agri Jobs', value: 'agriJobs', icon: 'briefcase' },
+    { label: 'vetinary services', value: 'vetinary services', icon: 'briefcase' },
+    { label: 'crop practice', value: 'crop practice', icon: 'briefcase' },
   ];
 
   const quotes = [
@@ -30,7 +37,6 @@ const HomeServ = () => {
   ];
 
   const [randomQuote, setRandomQuote] = useState('');
-  const [newButtonLabel, setNewButtonLabel] = useState('');
 
   useEffect(() => {
     getRandomQuote();
@@ -45,28 +51,14 @@ const HomeServ = () => {
     console.log(`Button pressed: ${item.label}`);
     if (item.link) {
       if (item.value === 'valam') {
-        navigation.navigate('ValamPage'); // Navigate to ValamPage
+        navigation.navigate('ValamPage');
       } else if (item.value === 'marketplace') {
         Linking.openURL(item.link).catch((err) => console.error('Error opening link:', err));
+      } else if (item.value === 'seeds') {
+        navigation.navigate('SeedPage'); // Replace 'SeedPage' with the actual name of your seed page
       } else {
-        navigation.navigate(item.link); // Navigate to the specified page
+        navigation.navigate(item.link);
       }
-    }
-  };
-
-  const addNewButton = () => {
-    if (newButtonLabel.trim() !== '') {
-      const newButton = {
-        label: newButtonLabel,
-        value: `newButton_${customButtons.length}`,
-        link: 'NewPage',
-        icon: 'plus',
-      };
-
-      setCustomButtons([...customButtons, newButton]);
-      setNewButtonLabel('');
-
-      navigation.navigate(newButton.link);
     }
   };
 
@@ -105,23 +97,6 @@ const HomeServ = () => {
                 </View>
               </TouchableOpacity>
             ))}
-
-            <TextInput
-              style={styles.input}
-              placeholder="Enter Button Label"
-              value={newButtonLabel}
-              onChangeText={(text) => setNewButtonLabel(text)}
-            />
-
-            <TouchableOpacity
-              style={styles.button}
-              onPress={addNewButton}
-            >
-              <View style={styles.buttonContent}>
-                <Icon name="plus" size={30} color="#001F3F" />
-                <Text style={styles.buttonText}>Add Button</Text>
-              </View>
-            </TouchableOpacity>
           </View>
 
           <Text style={styles.savedData}>{newPageData}</Text>
@@ -205,15 +180,6 @@ const styles = StyleSheet.create({
     color: '#001F3F',
     marginTop: 5,
     textAlign: 'center',
-  },
-  input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 10,
-    paddingLeft: 10,
-    borderRadius: 5,
-    width: '80%',
   },
 });
 

@@ -6,9 +6,19 @@ const AppContext = createContext();
 export const AppProvider = ({ children }) => {
   const [newPageData, setNewPageData] = useState('');
   const [customButtons, setCustomButtons] = useState([]);
+  const [products, setProducts] = useState([]); // New state for products
+
+  const contextValue = {
+    newPageData,
+    setNewPageData,
+    customButtons,
+    setCustomButtons,
+    products,
+    setProducts,
+  };
 
   return (
-    <AppContext.Provider value={{ newPageData, setNewPageData, customButtons, setCustomButtons }}>
+    <AppContext.Provider value={contextValue}>
       {children}
     </AppContext.Provider>
   );
