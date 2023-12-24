@@ -1,11 +1,38 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, Linking, Animated } from 'react-native';
+import React, { useRef, useEffect } from 'react';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  Linking,
+  Animated,
+  Easing,
+  Dimensions,
+} from 'react-native';
+
+const { width } = Dimensions.get('window');
 
 const HomeServ = () => {
   const logo = require('../assets/logo.png');
   const phoneNumber = '+919746132313';
   const email = 'Svhss2024@gmail.com';
-  const coordinates = '10.644267683689785,76.20448837123018';
+  const coordinates = "10°38'24.0\"N 76°12'00.0\"E"; // Reduced the size of coordinates
+
+  const fadeInAnim = useRef(new Animated.Value(0)).current;
+  const scaleAnim = fadeInAnim.interpolate({
+    inputRange: [0, 0.5, 1],
+    outputRange: [0, 1.2, 1],
+  });
+
+  useEffect(() => {
+    Animated.timing(fadeInAnim, {
+      toValue: 1,
+      duration: 1000,
+      useNativeDriver: true,
+      easing: Easing.ease,
+    }).start();
+  }, [fadeInAnim]);
 
   const openWhatsApp = () => {
     const whatsappUrl = `whatsapp://send?phone=${phoneNumber}`;
@@ -22,32 +49,31 @@ const HomeServ = () => {
     Linking.openURL(mapsUrl).catch((err) => console.error('Error opening Maps:', err));
   };
 
-  const fadeInAnim = new Animated.Value(0);
-
-  React.useEffect(() => {
-    Animated.timing(fadeInAnim, {
-      toValue: 1,
-      duration: 1000,
-      useNativeDriver: true,
-    }).start();
-  }, []);
-
   return (
     <View style={styles.container}>
-      <Animated.Image source={logo} style={[styles.logo, { opacity: fadeInAnim }]} />
+      <Animated.Image
+        source={logo}
+        style={[
+          styles.logo,
+          {
+            opacity: fadeInAnim,
+            transform: [{ scale: scaleAnim }],
+          },
+        ]}
+      />
       <View style={styles.contentContainer}>
-        <Text style={styles.title}>Contact Us</Text>
+        <Text style={styles.title}>sarvodhyam</Text>
 
         {/* School Description Section */}
         <View style={styles.descriptionContainer}>
           <Text style={styles.descriptionText}>
-            Sarvodhayam Vhss Aryampadam High School (SVAHS) located at Thrissur Wadakkanchery Gups Puthuruthi Mundathikode is one of the popular schools in India. The School has been rated by 27 people on iCBSE. The Sarvodhayam Vhss Aryampadam High School has been viewed 855 times by the visitors on iCBSE. This School is counted among the top-rated Schools in Kerala with an excellent academic track record. If you're looking for more details regarding results, syllabus, application forms, admission procedure, and examinations schedule, kindly contact the relevant department of the school.
+            Welcome to Sarvodhayam Vhss Aryampadam High School (SVHSS), a place of learning, growth, and excellence. We strive to provide quality education and foster an environment where students can thrive academically and personally.
           </Text>
         </View>
 
         {/* Contact Section */}
         <View style={styles.contactContainer}>
-          <Text style={styles.contactTitle}>Contact Us</Text>
+          <Text style={styles.contactTitle}>Contact Information</Text>
 
           <TouchableOpacity onPress={openWhatsApp} style={styles.contactInfoContainer}>
             <Text style={styles.contactInfo}>
@@ -66,6 +92,11 @@ const HomeServ = () => {
               📍 Location: {coordinates}
             </Text>
           </TouchableOpacity>
+
+          {/* Support Sentence */}
+          <Text style={styles.supportText}>
+            For any support-related inquiries or other concerns, please don't hesitate to reach out to our dedicated Contact Us team. We're here to assist you!
+          </Text>
         </View>
       </View>
     </View>
@@ -75,103 +106,108 @@ const HomeServ = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignItems: 'center',
-    paddingLeft: 20,
-    paddingRight: 20,
-    backgroundColor: '#FFD180', // Warm orange background color
+    padding: 20,
+    backgroundColor: '#FFD180',
   },
   logo: {
-    width: 100,
-    height: 100,
-    marginRight: 20,
-    borderRadius: 50,
-    borderWidth: 3,
-    borderColor: '#A64C00', // Brown border color
+    width: width * 0.5,
+    height: width * 0.5,
+    marginBottom: 20,
+    resizeMode: 'contain',
+    borderWidth: 5,
+    borderColor: '#A64C00',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 5,
+      height: 10,
     },
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
-    elevation: 10,
+    shadowOpacity: 0.8,
+    shadowRadius: 10,
+    elevation: 15,
   },
   contentContainer: {
     flex: 1,
     justifyContent: 'center',
+    width: '100%',
   },
   title: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#A64C00', // Brown text color
+    color: '#A64C00',
     marginBottom: 20,
     fontFamily: 'poppins-medium',
   },
   descriptionContainer: {
     marginTop: 20,
-    alignItems: 'flex-start',
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
-    borderRadius: 10,
+    borderRadius: 15,
     padding: 20,
-    width: '80%',
+    width: '100%',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 5,
+      height: 10,
     },
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
-    elevation: 10,
+    shadowOpacity: 0.8,
+    shadowRadius: 10,
+    elevation: 15,
   },
   descriptionText: {
     fontSize: 16,
-    color: '#333',
+    color: '#555',
     fontFamily: 'poppins-regular',
-    textAlign: 'left',
+    textAlign: 'justify',
   },
   contactContainer: {
     marginTop: 20,
-    alignItems: 'flex-start',
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
-    borderRadius: 10,
+    borderRadius: 15,
     padding: 20,
-    width: '80%',
+    width: '100%',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 5,
+      height: 10,
     },
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
-    elevation: 10,
+    shadowOpacity: 0.8,
+    shadowRadius: 10,
+    elevation: 15,
   },
   contactTitle: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#FF7F27', // Darker orange text color for header
-    marginBottom: 10,
+    color: '#FF7F27',
+    marginBottom: 15,
     fontFamily: 'poppins-medium',
   },
   contactInfoContainer: {
-    marginTop: 10,
+    marginTop: 15,
     alignItems: 'flex-start',
   },
   contactInfo: {
     fontSize: 18,
-    color: '#333',
-    marginBottom: 10,
+    color: '#555',
+    marginBottom: 15,
     fontFamily: 'poppins-medium',
   },
   locationInfoContainer: {
-    marginTop: 10,
-    alignItems: 'flex-start',
+    marginTop: 15,
+    alignItems: 'center',
   },
   locationInfo: {
-    fontSize: 18,
-    color: '#333',
-    marginBottom: 10,
+    fontSize: 14,
+    color: '#555',
+    marginTop: 10,
     fontFamily: 'poppins-medium',
+  },
+  supportText: {
+    fontSize: 16,
+    color: '#555',
+    fontFamily: 'poppins-regular',
+    textAlign: 'justify',
+    marginTop: 15,
   },
 });
 
