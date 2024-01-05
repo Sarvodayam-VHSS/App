@@ -5,6 +5,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+// Import the ShoppingScreen component
+import ShoppingScreen from './Shopping'; // Adjust the path accordingly
+
 const VehicleScreen = () => {
   // Add your Vehicle screen content here
   return (
@@ -78,7 +81,10 @@ const HomeScreen = () => {
         navigation.navigate('Professional');
         break;
       case 'Vehicle':
-        navigation.navigate('Vehicle'); // Navigate to the Vehicle.js page
+        navigation.navigate('Vehicle');
+        break;
+      case 'Shopping':
+        navigation.navigate('Shopping'); // Navigate to the Shopping.js page
         break;
       default:
         navigation.navigate(item.value);

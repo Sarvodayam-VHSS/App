@@ -65,12 +65,42 @@ const NewPage = () => {
     setCustomerPhoneNumber('');
   };
 
+  const editProduct = () => {
+    if (selectedProduct) {
+      const editedProduct = {
+        ...selectedProduct,
+        name: productName || selectedProduct.name,
+        price: productPrice || selectedProduct.price,
+        details: productDetails || selectedProduct.details,
+        image: productImage || selectedProduct.image,
+        phoneNumber: customerPhoneNumber || selectedProduct.phoneNumber,
+      };
+
+      const updatedProducts = products.map((product) =>
+        product.id === selectedProduct.id ? editedProduct : product
+      );
+
+      setProducts(updatedProducts);
+      setSelectedProduct(null);
+    }
+  };
+
   const showProductDetails = (product) => {
     setSelectedProduct(product);
+    setProductName(product.name);
+    setProductPrice(product.price);
+    setProductDetails(product.details);
+    setProductImage(product.image);
+    setCustomerPhoneNumber(product.phoneNumber);
   };
 
   const closeProductDetails = () => {
     setSelectedProduct(null);
+    setProductName('');
+    setProductPrice('');
+    setProductDetails('');
+    setProductImage(null);
+    setCustomerPhoneNumber('');
   };
 
   return (
@@ -79,7 +109,7 @@ const NewPage = () => {
       style={styles.backgroundImage}
     >
       <ScrollView contentContainerStyle={styles.container}>
-        <Text style={styles.header}>food products Selling Page</Text>
+        <Text style={styles.header}>Ende Nadu Selling Page</Text>
 
         <TouchableOpacity style={styles.imageButton} onPress={selectProductImage}>
           <Text style={styles.buttonText}>Select Product Image</Text>
@@ -98,7 +128,7 @@ const NewPage = () => {
 
         <TextInput
           style={styles.input}
-          placeholder="Product Price"
+          placeholder="Product Price (in Rupees)"
           value={productPrice}
           onChangeText={(text) => setProductPrice(text)}
           keyboardType="numeric"
@@ -119,9 +149,15 @@ const NewPage = () => {
           keyboardType="numeric"
         />
 
-        <TouchableOpacity style={styles.sellButton} onPress={sellProduct}>
-          <Text style={styles.buttonText}>Sell Product</Text>
-        </TouchableOpacity>
+        {selectedProduct ? (
+          <TouchableOpacity style={styles.editButton} onPress={editProduct}>
+            <Text style={styles.buttonText}>Edit Product</Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity style={styles.sellButton} onPress={sellProduct}>
+            <Text style={styles.buttonText}>Sell Product</Text>
+          </TouchableOpacity>
+        )}
 
         <View style={styles.productListContainer}>
           <Text style={styles.productListTitle}>Products</Text>
@@ -135,7 +171,7 @@ const NewPage = () => {
               >
                 <Image source={{ uri: item.image }} style={styles.productImage} resizeMode="cover" />
                 <Text style={styles.productName}>{item.name}</Text>
-                <Text style={styles.productPrice}>${item.price}</Text>
+                <Text style={styles.productPrice}>₹{item.price}</Text>
               </TouchableOpacity>
             )}
           />
@@ -158,7 +194,7 @@ const NewPage = () => {
                     resizeMode="cover"
                   />
                   <Text style={styles.productName}>{selectedProduct.name}</Text>
-                  <Text style={styles.productPrice}>${selectedProduct.price}</Text>
+                  <Text style={styles.productPrice}>₹{selectedProduct.price}</Text>
                   <Text style={styles.productDetails}>{selectedProduct.details}</Text>
                   <Text style={styles.dateTime}>
                     Date: {selectedProduct.date}, Time: {selectedProduct.time}
@@ -186,16 +222,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
-    backgroundColor: 'rgba(255, 255, 255, 0.8)', // Set background color with opacity
+    backgroundColor: 'rgba(255, 165, 0, 0.8)', // Orange background color with opacity
   },
   header: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
-    color: '#e44d26',
+    color: '#e44d26', // Orange color
   },
   imageButton: {
-    backgroundColor: '#e44d26',
+    backgroundColor: '#e44d26', // Orange color
     padding: 12,
     borderRadius: 8,
     justifyContent: 'center',
@@ -218,7 +254,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   sellButton: {
-    backgroundColor: '#e44d26',
+    backgroundColor: '#e44d26', // Orange color
+    padding: 12,
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  editButton: {
+    backgroundColor: '#e44d26', // Orange color
     padding: 12,
     borderRadius: 8,
     justifyContent: 'center',
@@ -236,7 +280,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10,
-    color: '#e44d26',
+    color: '#e44d26', // Orange color
   },
   productListItem: {
     backgroundColor: '#fff',
@@ -287,7 +331,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 16,
-    color: '#e44d26',
+    color: '#e44d26', // Orange color
   },
   modalProductImage: {
     width: '100%',
@@ -296,7 +340,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   closeButton: {
-    backgroundColor: '#e44d26',
+    backgroundColor: '#e44d26', // Orange color
     padding: 12,
     borderRadius: 8,
     justifyContent: 'center',

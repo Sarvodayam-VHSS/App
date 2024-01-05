@@ -1,9 +1,12 @@
-// HomeServ.js
+// Professionals.js
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons'; // Import the icon library
+import { View, Text, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
 
-const HomeServ = () => {
+const Professionals = () => {
+  const navigation = useNavigation();
+
   const serviceButtons = [
     { label: 'Lawyer', value: 'lawyer', icon: 'ios-briefcase-outline' },
     { label: 'Health Care', value: 'healthcare', icon: 'ios-medkit-outline' },
@@ -19,32 +22,47 @@ const HomeServ = () => {
 
   const handleButtonPress = (item) => {
     console.log(`Button pressed: ${item.label}`);
+
+    // Navigate to a new page (replace 'YourNewPage' with the actual name of your new page component)
+    if (item.value === 'lawyer') {
+      navigation.navigate('Lawyer');
+    }
+    // Add more conditions for other buttons if needed
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Professional</Text>
+    <ImageBackground
+      source={require('../assets/bg.jpg')} // Update the path to your actual image
+      style={styles.background}
+    >
+      <View style={styles.container}>
+        <Text style={styles.text}>Professional</Text>
 
-      {/* Render service theme buttons */}
-      <View style={styles.buttonContainer}>
-        {serviceButtons.map((item) => (
-          <TouchableOpacity
-            key={item.value}
-            style={styles.button}
-            onPress={() => handleButtonPress(item)}
-          >
-            {/* Use the specified icon for each button */}
-            <Icon name={item.icon} size={30} color="#001F3F" />
+        {/* Render service theme buttons */}
+        <View style={styles.buttonContainer}>
+          {serviceButtons.map((item) => (
+            <TouchableOpacity
+              key={item.value}
+              style={styles.button}
+              onPress={() => handleButtonPress(item)}
+            >
+              {/* Use the specified icon for each button */}
+              <Icon name={item.icon} size={30} color="#001F3F" />
 
-            <Text style={styles.buttonText}>{item.label}</Text>
-          </TouchableOpacity>
-        ))}
+              <Text style={styles.buttonText}>{item.label}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
       </View>
-    </View>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    resizeMode: 'cover',
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -54,6 +72,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 20,
+    color: '#fff',
   },
   buttonContainer: {
     width: '100%',
@@ -65,12 +84,12 @@ const styles = StyleSheet.create({
   button: {
     padding: 15,
     marginVertical: 10,
-    width: '30%',
+    width: '31%',
     aspectRatio: 1,
     borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'transparent',
+    backgroundColor: 'white',
     borderColor: '#001F3F',
     borderWidth: 1,
   },
@@ -83,4 +102,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeServ;
+export default Professionals;

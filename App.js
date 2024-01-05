@@ -15,8 +15,11 @@ import Others from './src/Others';
 import Professional from './src/Professional';
 import Contact from './src/Contact';
 import NewPage from './src/NewPage';
+import Shopping from './src/Shopping'
 import ValamPage from './src/agricultural/ValamPage';
 import VehicleScreen from './src/Vehicle'; // Add this import statement
+import Lawyer from './src/professionals screen/Lawyer';
+import John from './src/professionals screen/Lawyers/John';
 import { AppProvider } from './src/AppContext';
 
 const Stack = createStackNavigator();
@@ -89,7 +92,7 @@ const App = () => {
           <Stack.Screen
             name="NewPage"
             component={NewPage}
-            options={{ title: 'New Page' }}
+            options={{ title: 'Sell Products' }}
           />
           <Stack.Screen
             name="ValamPage"
@@ -100,6 +103,21 @@ const App = () => {
             name="Vehicle"
             component={VehicleScreen}
             options={{ title: 'Vehicle' }}
+          />
+          <Stack.Screen
+            name="Shopping"
+            component={Shopping}
+            options={{ title: 'Shopping' }}
+          />
+          <Stack.Screen
+            name="Lawyer"
+            component={Lawyer}
+            options={{ title: 'Lawyer' }}
+          />
+          <Stack.Screen
+            name="John"
+            component={John}
+            options={{ title: 'John' }}
           />
           {/* Add other screens here */}
         </Stack.Navigator>
