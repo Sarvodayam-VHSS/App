@@ -9,7 +9,7 @@ const Professionals = () => {
 
   const serviceButtons = [
     { label: 'Lawyer', value: 'lawyer', icon: 'ios-briefcase-outline' },
-    { label: 'Health Care', value: 'healthcare', icon: 'ios-medkit-outline' },
+    { label: 'Health Care', value: 'hc', icon: 'ios-medkit-outline' },
     { label: 'Finance', value: 'finance', icon: 'ios-cash-outline' },
     { label: 'Insurance', value: 'insurance', icon: 'ios-shield-outline' },
     { label: 'Engineering', value: 'engineering', icon: 'ios-hammer-outline' },
@@ -27,6 +27,34 @@ const Professionals = () => {
     if (item.value === 'lawyer') {
       navigation.navigate('Lawyer');
     }
+    if (item.value === 'hc') {
+      navigation.navigate('Healthcare');
+    }
+    if (item.value === 'finance') {
+      navigation.navigate('Finance');
+    }
+    if (item.value === 'firedepartment') {
+      navigation.navigate('FireDepartment');
+    }
+    if (item.value === 'insurance') {
+      navigation.navigate('Insurance');
+    }
+    if (item.value === 'engineering') {
+      navigation.navigate('Engineering');
+    }
+    if (item.value === 'policeservices') {
+      navigation.navigate('PoliceServices');
+    }
+    if (item.value === 'itprofessionals') {
+      navigation.navigate('ITProfessionals');
+    }
+    if (item.value === 'photo/videographers') {
+      navigation.navigate('PhotoVideoGraphers');
+    }
+    if (item.value === 'socialworkers') {
+      navigation.navigate('SocialWorkers');
+    }
+    
     // Add more conditions for other buttons if needed
   };
 
