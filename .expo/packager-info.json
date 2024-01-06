@@ -1,8 +1,8 @@
 {
   "expoServerNgrokUrl": "https://t2-667.anonymous.app.exp.direct",
   "packagerNgrokUrl": "https://t2-667.anonymous.app.exp.direct",
-  "ngrokPid": 8112,
-  "webpackServerPort": null,
+  "ngrokPid": 3864,
+  "webpackServerPort": 19006,
   "expoServerPort": 19000,
   "packagerPort": 19000
 }

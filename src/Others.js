@@ -1,9 +1,12 @@
 // HomeServ.js
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Linking, ScrollView } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const HomeServ = () => {
+const Others = () => {
+  const navigation = useNavigation();
+
   const serviceButtons = [
     { label: 'KSEB', value: 'kseb', link: 'https://wss.kseb.in/selfservices/quickpay', icon: 'ios-flash-outline' },
     { label: 'KSFE', value: 'ksfe', link: 'https://ksfeonline.com/payment', icon: 'ios-cash-outline' },
@@ -11,11 +14,11 @@ const HomeServ = () => {
     { label: 'Post Office', value: 'postOffice', link: 'https://www.indiapost.gov.in/', icon: 'ios-mail-outline' },
     { label: 'Courier', value: 'courier', link: 'https://www.dhl.com/', icon: 'ios-archive-outline' },
     { label: 'Bank', value: 'bank', link: 'https://www.rbi.org.in/', icon: 'ios-briefcase-outline' },
-    { label: 'Hospital', value: 'hospital', link: 'https://dhs.kerala.gov.in/', icon: 'ios-medkit-outline' },
+    { label: 'Hospital', value: 'hospital', icon: 'ios-medkit-outline' },
     { label: 'Edu. Instit.', value: 'eduInstitute', link: 'https://education.kerala.gov.in/', icon: 'ios-book-outline' },
     { label: 'Online Shops', value: 'shops', link: 'https://www.amazon.in/', icon: 'ios-cart-outline' },
-    { label: 'Medical Store', value: 'medicalStore', link: 'https://www.quickerala.com/thrissur/healthcare/medical-shops/sbct-5801-dt-13', icon: 'ios-medical-outline' },
-    { label: 'Religious Place', value: 'religiousPlaces', link: 'http://tinyurl.com/religiousplaces', icon: 'ios-star-outline' },
+    { label: 'Medical Store', value: 'medicalStore', icon: 'ios-medical-outline' },
+    { label: 'Religious Place', value: 'religiousPlaces', icon: 'ios-star-outline' },
     { label: 'Hotels', value: 'hotels', link: 'http://tinyurl.com/363e2vau', icon: 'ios-bed-outline' },
     { label: 'Jobs', value: 'jobVacancies', link: 'https://www.google.com/about/careers/applications/jobs/results/?location=India', icon: 'ios-briefcase-outline' },
     { label: 'Media', value: 'media', link: 'https://www.manoramaonline.com/', icon: 'ios-newspaper-outline' },
@@ -29,6 +32,15 @@ const HomeServ = () => {
     if (item.link) {
       console.log(`Redirecting to: ${item.link}`);
       Linking.openURL(item.link).catch((err) => console.error('Error opening link:', err));
+    }
+    if (item.value === 'hospital') {
+      navigation.navigate('Hospital');
+    }
+    if (item.value === 'medicalStore') {
+      navigation.navigate('MedicalStore');
+    }
+    if (item.value === 'religiousPlaces') {
+      navigation.navigate('ReligiousPlace');
     }
   };
 
@@ -88,4 +100,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeServ;
+export default Others;

@@ -3,14 +3,14 @@ import { View, Text, FlatList, StyleSheet, RefreshControl, TouchableOpacity, Ima
 import { useNavigation } from '@react-navigation/native';
 
 const data = [
-  { id: '0', category: 'Corporate Lawyer', name: 'John', age: 35, experience: '5 years', place: 'New York', pfp: require('../professionals screen/pfp/ronaldo.jpg') },
-  { id: '1', category: 'Family Lawyer', name: 'James', age: 40, experience: '8 years', place: 'Los Angeles', pfp: require('../professionals screen/pfp/messi.jpg') },
-  { id: '2', category: 'Criminal Lawyer', name: 'Wick', age: 45, experience: '10 years', place: 'Chicago', pfp: require('../professionals screen/pfp/jude.jpeg') },
-  { id: '3', category: 'Real Estate Lawyer', name: 'Alfred', age: 38, experience: '6 years', place: 'San Francisco', pfp: require('../professionals screen/pfp/neymar.jpg') },
+  { id: '0', category: 'Portrait Photographer', name: 'John', age: 35, experience: '5 years', place: 'New York', pfp: require('../assets/ronaldo.jpg') },
+  { id: '1', category: 'Wedding Photographer', name: 'James', age: 40, experience: '8 years', place: 'Los Angeles', pfp: require('../assets/messi.jpg') },
+  { id: '2', category: 'Fashion Photographer', name: 'Wick', age: 45, experience: '10 years', place: 'Chicago', pfp: require('../assets/jude.jpeg') },
+  { id: '3', category: 'Real Estate Photographer', name: 'Alfred', age: 38, experience: '6 years', place: 'San Francisco', pfp: require('../assets/neymar.jpg') },
   // Add more items as needed
 ];
 
-const Lawyer = () => {
+const PhotoVideoGraphers = () => {
   const [refreshing, setRefreshing] = useState(false);
   const navigation = useNavigation(); // Add this line
 
@@ -27,6 +27,15 @@ const Lawyer = () => {
 
     if (item.name === 'John') {
       navigation.navigate('John');
+    }
+    if (item.name === 'James') {
+      navigation.navigate('James');
+    }
+    if (item.name === 'Wick') {
+      navigation.navigate('Wick');
+    }
+    if (item.name === 'Alfred') {
+      navigation.navigate('Alfred');
     }
   };
 
@@ -129,4 +138,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Lawyer;
+export default PhotoVideoGraphers;

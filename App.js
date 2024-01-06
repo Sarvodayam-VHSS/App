@@ -18,8 +18,23 @@ import NewPage from './src/NewPage';
 import Shopping from './src/Shopping'
 import ValamPage from './src/agricultural/ValamPage';
 import VehicleScreen from './src/Vehicle'; // Add this import statement
-import Lawyer from './src/professionals screen/Lawyer';
-import John from './src/professionals screen/Lawyers/John';
+import Lawyer from './src/Lawyer';
+import HealthCare from './src/HealthCare';
+import Finance from './src/Finance';
+import Insurance from './src/Insurance';
+import Engineering from './src/Engineering';
+import PoliceServices from './src/Police Services';
+import ITProfessionals from './src/ITProfessionals';
+import PhotoVideoGraphers from './src/PhotoVideoGraphers';
+import SocialWorkers from './src/SocialWorkers';
+import FireDepartment from './src/FireDepartment';
+import John from './src/John';
+import James from './src/James';
+import Wick from './src/Wick';
+import Alfred from './src/Alfred';
+import ReligiousPlace from './src/ReligiousPlace';
+import Hospital from './src/Hospital'
+import MedicalStore from './src/MedicalStore'
 import { AppProvider } from './src/AppContext';
 
 const Stack = createStackNavigator();
@@ -115,9 +130,84 @@ const App = () => {
             options={{ title: 'Lawyer' }}
           />
           <Stack.Screen
+            name="Healthcare"
+            component={HealthCare}
+            options={{ title: 'Healthcare' }}
+          />
+          <Stack.Screen
+            name="Finance"
+            component={Finance}
+            options={{ title: 'Finance' }}
+          />
+          <Stack.Screen
+            name="Engineering"
+            component={Engineering}
+            options={{ title: 'Engineering' }}
+          />
+          <Stack.Screen
+            name="PoliceServices"
+            component={PoliceServices}
+            options={{ title: 'PoliceServices' }}
+          />
+          <Stack.Screen
+            name="Insurance"
+            component={Insurance}
+            options={{ title: 'Insurance' }}
+          />
+          <Stack.Screen
+            name="ITProfessionals"
+            component={ITProfessionals}
+            options={{ title: 'ITProfessionals' }}
+          />
+          <Stack.Screen
+            name="PhotoVideoGraphers"
+            component={PhotoVideoGraphers}
+            options={{ title: 'PhotoVideoGraphers' }}
+          />
+          <Stack.Screen
+            name="FireDepartment"
+            component={FireDepartment}
+            options={{ title: 'FireDepartment' }}
+          />
+          <Stack.Screen
+            name="SocialWorkers"
+            component={SocialWorkers}
+            options={{ title: 'SocialWorkers' }}
+          />
+          <Stack.Screen
             name="John"
             component={John}
             options={{ title: 'John' }}
+          />
+          <Stack.Screen
+            name="James"
+            component={James}
+            options={{ title: 'James' }}
+          />
+          <Stack.Screen
+            name="Wick"
+            component={Wick}
+            options={{ title: 'Wick' }}
+          />
+          <Stack.Screen
+            name="Alfred"
+            component={Alfred}
+            options={{ title: 'Alfred' }}
+          />
+          <Stack.Screen
+            name="ReligiousPlace"
+            component={ReligiousPlace}
+            options={{ title: 'ReligiousPlace' }}
+          />
+          <Stack.Screen
+            name="MedicalStore"
+            component={MedicalStore}
+            options={{ title: 'MedicalStore' }}
+          />
+          <Stack.Screen
+            name="Hospital"
+            component={Hospital}
+            options={{ title: 'Hospital' }}
           />
           {/* Add other screens here */}
         </Stack.Navigator>
