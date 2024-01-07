@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, ImageBackground, Keyboard } from 'react-native'; // Import Keyboard from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 import * as Font from 'expo-font';
@@ -8,23 +8,31 @@ const LoginScreen = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const passwordInputRef = useRef(null);
+  const emailInputRef = useRef(null); // Create a ref for the email input
   const navigation = useNavigation();
 
   useEffect(() => {
-    // Load the 'Poppins' font
     const loadFonts = async () => {
       await Font.loadAsync({
-        'poppins-medium': require('./Poppins-Medium.ttf'), // Adjust the path here
+        'poppins-medium': require('./Poppins-Medium.ttf'),
       });
     };
 
     loadFonts();
+
+    // Use a timeout to ensure that the email input is focused after the render
+    const timeoutId = setTimeout(() => {
+      if (emailInputRef.current) {
+        emailInputRef.current.focus();
+      }
+    }, 0);
+
+    return () => clearTimeout(timeoutId); // Clear the timeout on component unmount
   }, []);
 
   const handleLogin = () => {
-    // Perform login logic here
     if (username && password) {
-      // Successful login, navigate to the Home screen and reset the navigation state
       navigation.reset({
         index: 0,
         routes: [{ name: 'Home' }],
@@ -35,7 +43,6 @@ const LoginScreen = () => {
   };
 
   const handleNavigateToRegistration = () => {
-    // Navigate to the registration screen
     navigation.navigate('Register');
   };
 
@@ -50,17 +57,23 @@ const LoginScreen = () => {
           <Text style={[styles.title, { fontFamily: 'poppins-medium' }]}>Login</Text>
           <Icon name="user" size={40} color="black" style={styles.profileIcon} />
           <TextInput
+            ref={emailInputRef} // Assign the ref to the email input
             style={styles.input}
             placeholder="Email"
             value={username}
             onChangeText={setUsername}
+            returnKeyType="next"
+            onSubmitEditing={() => passwordInputRef.current.focus()}
           />
           <TextInput
+            ref={passwordInputRef}
             style={styles.input}
             placeholder="Password"
             secureTextEntry
             value={password}
             onChangeText={setPassword}
+            returnKeyType="go"
+            onSubmitEditing={handleLogin}
           />
           {error ? <Text style={styles.error}>{error}</Text> : null}
           <View style={styles.buttonContainer}>
@@ -94,7 +107,7 @@ const styles = StyleSheet.create({
     height: 400,
     padding: 40,
     borderRadius: 25,
-    backgroundColor: 'rgba(255, 255, 255, 0.8)', // Set the alpha (fourth parameter) to control transparency
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
     borderColor: 'blue',
     borderWidth: 2,
     shadowColor: '#000',
@@ -102,14 +115,14 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 5,
     elevation: 5,
-    alignItems: 'center', // Center the items inside the login box
+    alignItems: 'center',
   },
   title: {
     textAlign: 'center',
     fontSize: 24,
     color: 'black',
     fontWeight: 'bold',
-    marginBottom: 10, // Adjusted margin to separate the title and icon
+    marginBottom: 10,
     fontFamily: 'poppins-medium',
   },
   input: {
@@ -119,7 +132,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 10,
     paddingLeft: 10,
-    borderRadius: 15, // Add this line to make the input boxes rounded
+    borderRadius: 15,
   },
   error: {
     color: 'red',
@@ -129,7 +142,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 10,
-    width: '100%', // Make sure the buttons take the full width
+    width: '100%',
   },
   button: {
     borderRadius: 20,
@@ -146,7 +159,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   profileIcon: {
-    marginBottom: 20, // Add margin to separate the icon from the email input
+    marginBottom: 20,
   },
 });
 
