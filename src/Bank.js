@@ -1,73 +1,55 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet, RefreshControl, TouchableOpacity, Linking, Picker, Image, Modal } from 'react-native';
+import { View, Text, FlatList, StyleSheet, RefreshControl, TouchableOpacity, Linking, Picker, Image, Modal, Button, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 
 const data = [
   { 
     id: '0', 
-    category: 'Church', 
-    name: 'Christ King Church Mundathicode', 
-    place: 'Mundathicode', 
-    mapLink: 'https://maps.app.goo.gl/Jnr8jPxZpDu9ZGXo7',
-    events: [
-      { eventName: 'Perunnal Event', eventDetails: 'Annual Perunnal celebration at Christ King Church.' },
-    ],
+    type: 'ATM',
+    name: 'BOI ATM', 
+    place: 'Aryampadam Centre', 
+    mapLink: 'https://maps.app.goo.gl/ZZeN9pEjjJfgWbrS8',
+    phoneNumber: '',
+    whatsappNumber: '',
   },
+
   { 
     id: '1', 
-    category: 'Temple', 
-    name: 'Aryampadam Sri Mahavishnu Temple', 
-    place: 'Aryampadam', 
-    mapLink: 'https://maps.app.goo.gl/9r6jDHz7DH56YT9X8',
-    events: [
-      { eventName: 'Pooram Event', eventDetails: 'Traditional Pooram festival at Sri Mahavishnu Temple.' },
-    ],
+    type: 'ATM',
+    name: 'SBI ATM', 
+    place: 'MUndathikode', 
+    mapLink: 'https://maps.app.goo.gl/WjCuJnr9cwdbtoWb7',
+    phoneNumber: '1800112211',
+    whatsappNumber: '',
   },
+
   { 
     id: '2', 
-    category: 'Mosque', 
-    name: 'Aryampadam Mosque', 
-    place: 'Aryampadam Main Road', 
-    mapLink: 'https://maps.app.goo.gl/AP2DQcAmn5V7Xmh96',
-    events: [
-      { eventName: 'Perunnal Event', eventDetails: 'Annual Perunnal celebration at Aryampadam Mosque.' },
-    ],
+    type: 'ATM',
+    name: 'SIB ATM', 
+    place: 'Velur Post Office', 
+    mapLink: 'https://maps.app.goo.gl/LMsQkiaEBRrdSfzS8',
+    phoneNumber: '9876543210',
+    whatsappNumber: '9876543210',
+  },
+
+  { 
+    id: '3', 
+    type: 'Bank',
+    name: 'South Indian Bank', 
+    place: 'Velur Post Office', 
+    mapLink: 'https://maps.app.goo.gl/DxhJbvqiNXHkBRPr5',
+    phoneNumber: '1234567890',
+    whatsappNumber: '1234567890',
   },
 ];
-
-const EventPopup = ({ visible, onClose, events }) => {
-  return (
-    <Modal
-      animationType="slide"
-      transparent={true}
-      visible={visible}
-      onRequestClose={onClose}
-    >
-      <View style={styles.popupContainer}>
-        <View style={styles.popupContent}>
-          {events.map((event, index) => (
-            <View key={index}>
-              <Text style={styles.eventName}>{event.eventName}</Text>
-              <Text style={styles.eventDetails}>{event.eventDetails}</Text>
-            </View>
-          ))}
-          <TouchableOpacity style={styles.closeButton} onPress={onClose}>
-            <Text style={styles.closeButtonText}>Close</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </Modal>
-  );
-};
 
 const Lawyer = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [placeImages, setPlaceImages] = useState({});
-  const [isEventPopupVisible, setEventPopupVisible] = useState(false);
-  const [selectedEvent, setSelectedEvent] = useState({ events: [] });
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -110,17 +92,47 @@ const Lawyer = () => {
     Linking.openURL(item.mapLink);
   };
 
+  const handleCallPress = (phoneNumber) => {
+    if (!phoneNumber) {
+      Alert.alert('Phone number is not available.');
+      return;
+    }
+  
+    const url = `tel:${phoneNumber}`;
+    Linking.canOpenURL(url)
+      .then((supported) => {
+        if (supported) {
+          Linking.openURL(url);
+        } else {
+          Alert.alert('Phone number is not available.');
+        }
+      })
+      .catch((error) => console.error('Error opening phone app:', error));
+  };
+  
+  const handleWhatsAppPress = (whatsappNumber) => {
+    if (!whatsappNumber) {
+      Alert.alert('WhatsApp number is not available.');
+      return;
+    }
+  
+    const url = `whatsapp://send?phone=${whatsappNumber}`;
+    Linking.canOpenURL(url)
+      .then((supported) => {
+        if (supported) {
+          Linking.openURL(url);
+        } else {
+          Alert.alert('WhatsApp is not available.');
+        }
+      })
+      .catch((error) => console.error('Error opening WhatsApp:', error));
+  };
   const handleMorePress = () => {
     setIsMenuVisible(!isMenuVisible);
   };
 
   const handleDropdownChange = (value) => {
     setSelectedCategory(value);
-  };
-
-  const handleEventPress = (events) => {
-    setSelectedEvent({ events });
-    setEventPopupVisible(true);
   };
 
   const renderMenu = () => {
@@ -132,9 +144,8 @@ const Lawyer = () => {
             onValueChange={(itemValue) => handleDropdownChange(itemValue)}
           >
             <Picker.Item label="All" value="All" />
-            <Picker.Item label="Church" value="Church" />
-            <Picker.Item label="Temple" value="Temple" />
-            <Picker.Item label="Mosque" value="Mosque" />
+            <Picker.Item label="ATM" value="ATM" />
+            <Picker.Item label="Bank" value="Bank" />
           </Picker>
         </View>
       );
@@ -146,7 +157,7 @@ const Lawyer = () => {
     if (selectedCategory === 'All') {
       return true;
     } else {
-      return item.category === selectedCategory;
+      return item.type === selectedCategory;  // Change from 'category' to 'type'
     }
   });
 
@@ -167,22 +178,34 @@ const Lawyer = () => {
         <View style={styles.textContainer}>
           <Text style={styles.itemText}>{item.name}</Text>
           <Text style={styles.subText}>{`Place: ${item.place}`}</Text>
+          <Text style={styles.subText}>{`Type: ${item.type}`}</Text>  {/* Change from 'category' to 'type' */}
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={() => handleMapPress(item)}>
             <Ionicons name="location-outline" size={24} color="black" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={() => handleEventPress(item.events)}>
-            <Ionicons name="calendar-outline" size={24} color="black" />
-          </TouchableOpacity>
+          {item.type !== 'BOI ATM' && (
+            <TouchableOpacity style={styles.button} onPress={() => handleCallPress(item.phoneNumber)}>
+              <Ionicons name="call-outline" size={24} color="black" />
+            </TouchableOpacity>
+          )}
+          {item.type !== 'BOI ATM' && item.type !== 'SBI ATM' && (
+            <TouchableOpacity style={styles.button} onPress={() => handleWhatsAppPress(item.whatsappNumber)}>
+              <Ionicons name="logo-whatsapp" size={24} color="green" />
+            </TouchableOpacity>
+          )}
         </View>
         {renderMenu()}
       </TouchableOpacity>
     );
-  };
+  };  
 
   return (
     <View style={styles.container}>
+      <View style={styles.buttonContainer}>
+        <Button title="ATM" onPress={() => handleDropdownChange("ATM")} />
+        <Button title="Bank" onPress={() => handleDropdownChange("Bank")} />
+      </View>
       <FlatList
         data={filteredData}
         renderItem={renderItem}
@@ -191,11 +214,6 @@ const Lawyer = () => {
         onRefresh={handleRefresh}
         contentContainerStyle={styles.listContainer}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}
-      />
-      <EventPopup
-        visible={isEventPopupVisible}
-        onClose={() => setEventPopupVisible(false)}
-        events={selectedEvent.events}
       />
     </View>
   );
@@ -245,7 +263,8 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
+    justifyContent: 'space-around',
+    marginVertical: 10,
   },
   button: {
     padding: 5,
@@ -263,35 +282,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 2,
     elevation: 3,
-  },
-  popupContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  popupContent: {
-    backgroundColor: 'white',
-    padding: 20,
-    borderRadius: 10,
-    elevation: 5,
-  },
-  eventName: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  eventDetails: {
-    fontSize: 16,
-    color: '#555',
-    marginBottom: 10,
-  },
-  closeButton: {
-    alignSelf: 'flex-end',
-    padding: 10,
-  },
-  closeButtonText: {
-    fontSize: 16,
-    color: 'blue',
   },
 });
 

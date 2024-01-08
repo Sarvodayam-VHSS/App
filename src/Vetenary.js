@@ -6,32 +6,32 @@ import { Ionicons } from '@expo/vector-icons';
 const data = [
   { 
     id: '0', 
-    category: 'Church', 
-    name: 'Christ King Church Mundathicode', 
-    place: 'Mundathicode', 
-    mapLink: 'https://maps.app.goo.gl/Jnr8jPxZpDu9ZGXo7',
+    category: 'Agriculture Office', 
+    name: 'Agriculture Office Erumapetty', 
+    place: 'Erumapetty', 
+    mapLink: 'https://maps.app.goo.gl/JUY47X4yDKDkmMYS8',
     events: [
-      { eventName: 'Perunnal Event', eventDetails: 'Annual Perunnal celebration at Christ King Church.' },
+      { eventName: 'Pachakari Chanda', eventDetails: 'Agriculutre Ofiice In Erumappety Is Giving Away Vegitables In Less Prices And Many Events @ 21/1/24 , The Vegitable Offer Goes Away next Month' },
     ],
   },
   { 
     id: '1', 
-    category: 'Temple', 
-    name: 'Aryampadam Sri Mahavishnu Temple', 
-    place: 'Aryampadam', 
-    mapLink: 'https://maps.app.goo.gl/9r6jDHz7DH56YT9X8',
+    category: 'Agriculture Office', 
+    name: 'Agriculture Office Avanoor', 
+    place: 'Erumapetty', 
+    mapLink: 'https://maps.app.goo.gl/kDE3aHvUoiC76VQ78',
     events: [
-      { eventName: 'Pooram Event', eventDetails: 'Traditional Pooram festival at Sri Mahavishnu Temple.' },
+      { eventName: 'Pachakari Chanda', eventDetails: 'Agriculutre Ofiice In Avanoor Is Giving Away Vegitables In Less Prices And Many Events @ 21/1/24 , The Vegitable Offer Goes Away next Month' },
     ],
   },
   { 
-    id: '2', 
-    category: 'Mosque', 
-    name: 'Aryampadam Mosque', 
-    place: 'Aryampadam Main Road', 
-    mapLink: 'https://maps.app.goo.gl/AP2DQcAmn5V7Xmh96',
+    id: '1', 
+    category: 'Vetenary Office', 
+    name: 'Govt. Vetinary Dispensary', 
+    place: 'Erumapetty', 
+    mapLink: 'https://maps.app.goo.gl/xJgqLnuBKxMsGGzA9',
     events: [
-      { eventName: 'Perunnal Event', eventDetails: 'Annual Perunnal celebration at Aryampadam Mosque.' },
+      { eventName: 'Free Vaccination', eventDetails: 'They Are Giving Free Vaccination For The Pets For This Month' },
     ],
   },
 ];

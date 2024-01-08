@@ -16,7 +16,7 @@ import { Ionicons } from '@expo/vector-icons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 const data = [
-  { id: '0', category: 'Medical Collage', name: 'Thrissur Medical Collage', place: 'Near Athani', rating: 4.5 },
+  { id: '0', category: 'Medical College', name: 'Thrissur Medical College', place: 'Near Athani', rating: 4.5 },
   // Add more items as needed
 ];
 
@@ -29,10 +29,15 @@ const Hospital = () => {
   const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
 
+  const [isEmailFormVisible, setIsEmailFormVisible] = useState(false);
+  const [emailSubject, setEmailSubject] = useState('');
+  const [emailBody, setEmailBody] = useState('');
+
   const phoneNumber = '+91 89212 54370'; // The target phone number
   const mapLink = 'https://maps.app.goo.gl/63RmpY33wukF2vAP7';
   const websiteLink = 'https://gmctcr.in/';
   const treatmentsLink = 'https://gmctcr.in/departments';
+  const hospitalEmail = 'agnelfrancis2007@gmail.com'; // The hospital's email address
   const navigation = useNavigation();
 
   const handleRefresh = () => {
@@ -92,6 +97,29 @@ const Hospital = () => {
     setIsAppointmentFormVisible(false);
   };
 
+  const handleEmailButtonPress = () => {
+    setIsEmailFormVisible(true);
+  };
+
+  const handleEmailFormClose = () => {
+    setIsEmailFormVisible(false);
+  };
+
+  const handleEmailSubmit = () => {
+    const emailSubjectEncoded = encodeURIComponent(emailSubject);
+    const emailBodyEncoded = encodeURIComponent(emailBody);
+
+    const emailLink = `mailto:${hospitalEmail}?subject=${emailSubjectEncoded}&body=${emailBodyEncoded}`;
+
+    Linking.openURL(emailLink).then(() => {
+      console.log('Email opened successfully');
+    }).catch((error) => {
+      console.warn('Error opening email:', error);
+    });
+
+    setIsEmailFormVisible(false);
+  };
+
   const renderMenu = () => {
     if (isMenuVisible) {
       return (
@@ -104,6 +132,9 @@ const Hospital = () => {
           </TouchableOpacity>
           <TouchableOpacity style={styles.menuOption} onPress={handleAppointmentButtonPress}>
             <Text>Appointment</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.menuOption} onPress={handleEmailButtonPress}>
+            <Text>Email</Text>
           </TouchableOpacity>
           {/* Add more menu options as needed */}
         </View>
@@ -161,6 +192,43 @@ const Hospital = () => {
     return null;
   };
 
+  const renderEmailForm = () => {
+    if (isEmailFormVisible) {
+      return (
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={isEmailFormVisible}
+          onRequestClose={handleEmailFormClose}
+        >
+          <View style={styles.appointmentForm}>
+            <Text style={styles.formTitle}>Email Form</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Subject"
+              value={emailSubject}
+              onChangeText={(text) => setEmailSubject(text)}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Body"
+              value={emailBody}
+              onChangeText={(text) => setEmailBody(text)}
+              multiline
+            />
+            <TouchableOpacity style={styles.submitButton} onPress={handleEmailSubmit}>
+              <Text style={styles.submitButtonText}>Send Email</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.submitButton} onPress={handleEmailFormClose}>
+              <Text style={styles.submitButtonText}>Close</Text>
+            </TouchableOpacity>
+          </View>
+        </Modal>
+      );
+    }
+    return null;
+  };
+
   const renderItem = ({ item, index }) => {
     return (
       <TouchableOpacity
@@ -181,7 +249,7 @@ const Hospital = () => {
           <TouchableOpacity style={styles.button} onPress={handleCallPress}>
             <Ionicons name="call" size={24} color="black" />
           </TouchableOpacity>
-          {item.name === 'Thrissur Medical Collage' && (
+          {item.name === 'Thrissur Medical College' && (
             <TouchableOpacity style={styles.button} onPress={handleWhatsAppPress}>
               <Ionicons name="logo-whatsapp" size={24} color="black" />
             </TouchableOpacity>
@@ -200,6 +268,7 @@ const Hospital = () => {
         </View>
         {renderMenu()}
         {renderAppointmentForm()}
+        {renderEmailForm()}
         <Modal
           animationType="slide"
           transparent={true}
@@ -266,6 +335,7 @@ const styles = StyleSheet.create({
   itemText: {
     fontSize: 16,
     fontWeight: 'bold',
+    fontFamily: 'Poppins-Medium', // Font integration
   },
   subText: {
     fontSize: 14,
@@ -300,7 +370,6 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 25,
   },
-  // Styles for the appointment form
   appointmentForm: {
     flex: 1,
     justifyContent: 'center',
@@ -312,6 +381,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 20,
+    fontFamily: 'Poppins-Medium', // Font integration
   },
   input: {
     height: 40,
@@ -320,6 +390,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     padding: 10,
     width: '100%',
+    fontFamily: 'Poppins-Regular', // Font integration
   },
   datePickerButton: {
     flexDirection: 'row',
@@ -351,6 +422,37 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
   },
+  subText: {
+    fontSize: 14,
+    color: '#777',
+    fontFamily: 'Poppins-Regular', // Font integration
+  },
+  
+  // Add the Poppins font for the remaining text elements
+  datePickerButtonText: {
+    marginLeft: 10,
+    fontFamily: 'Poppins-Regular', // Font integration
+  },
+
+  // Add the Poppins font for the remaining text elements
+  selectedDateText: {
+    marginBottom: 10,
+    fontFamily: 'Poppins-Regular', // Font integration
+  },
+
+  // Add the Poppins font for the remaining text elements
+  submitButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontFamily: 'Poppins-Regular', // Font integration
+  },
+
+  // Add the Poppins font for the remaining text elements
+  closeButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontFamily: 'Poppins-Regular', // Font integration
+  },
 });
 
-export default Hospital;
+export default Hospital

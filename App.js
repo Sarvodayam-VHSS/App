@@ -36,6 +36,10 @@ import ReligiousPlace from './src/ReligiousPlace';
 import Hospital from './src/Hospital'
 import MedicalStore from './src/MedicalStore'
 import { AppProvider } from './src/AppContext';
+import Bank from './src/Bank'
+import Courier from './src/Courier'
+import Jobs from './src/Jobs'
+import Vetenary from './src/Vetenary'
 
 const Stack = createStackNavigator();
 
@@ -197,17 +201,37 @@ const App = () => {
           <Stack.Screen
             name="ReligiousPlace"
             component={ReligiousPlace}
-            options={{ title: 'ReligiousPlace' }}
+            options={{ title: 'Religious Places' }}
           />
           <Stack.Screen
             name="MedicalStore"
             component={MedicalStore}
-            options={{ title: 'MedicalStore' }}
+            options={{ title: 'Medical Store' }}
           />
           <Stack.Screen
             name="Hospital"
             component={Hospital}
             options={{ title: 'Hospital' }}
+          />
+          <Stack.Screen
+            name="Banks"
+            component={Bank}
+            options={{ title: 'Banks' }}
+          />
+          <Stack.Screen
+            name="Courier"
+            component={Courier}
+            options={{ title: 'Courier Services' }}
+          />
+          <Stack.Screen
+            name="Jobs"
+            component={Jobs}
+            options={{ title: 'Jobs' }}
+          />
+          <Stack.Screen
+            name="Agriculture Ventenary Offices"
+            component={Vetenary}
+            options={{ title: 'Agriculture & Vetenary Offices' }}
           />
           {/* Add other screens here */}
         </Stack.Navigator>

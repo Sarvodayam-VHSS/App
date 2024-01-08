@@ -1,20 +1,77 @@
-import React, { useState } from 'react';
-import { View, Text, FlatList, StyleSheet, RefreshControl, TouchableOpacity, Linking, Image, Modal } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, FlatList, StyleSheet, RefreshControl, TouchableOpacity, Linking, Image, Modal, Button, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 
 const data = [
-  { id: '0', category: 'English Medicines', name: 'HealthCare Pharmacy', place: 'Near School', rating: 4.5, phoneNumber: '', mapLink: 'https://maps.app.goo.gl/X1zyjjwEPFkCwBm36', profileImage: 'https://lh5.googleusercontent.com/p/AF1QipPrkK_Hy7gkh2r-qIIkwYTAesvJF6G0U9vOzgDL=w408-h612-k-no' },
-  { id: '1', category: 'Ayurveda Medicine', name: 'Kotakkal Arya Vaidya Shala', place: 'Near Sarvodayam VHSS School', rating: 4.5, phoneNumber: '', mapLink: 'https://maps.app.goo.gl/x1gtSmFTmBqNYDwh8', profileImage: 'https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=LcEhN20VCFLFEx2w1bnP1w&cb_client=search.gws-prod.gps&w=408&h=240&yaw=216.20923&pitch=0&thumbfov=100' },
-  // Add more items as needed
+  { 
+    id: '0', 
+    type: 'ATM',
+    name: 'BOI ATM', 
+    place: 'Aryampadam Centre', 
+    mapLink: 'https://maps.app.goo.gl/ZZeN9pEjjJfgWbrS8',
+    phoneNumber: '',
+    whatsappNumber: '',
+  },
+  { 
+    id: '1', 
+    type: 'ATM',
+    name: 'SBI ATM', 
+    place: 'MUndathikode', 
+    mapLink: 'https://maps.app.goo.gl/WjCuJnr9cwdbtoWb7',
+    phoneNumber: '1800112211',
+    whatsappNumber: '',
+  },
+  { 
+    id: '2', 
+    type: 'ATM',
+    name: 'SIB ATM', 
+    place: 'Velur Post Office', 
+    mapLink: 'https://maps.app.goo.gl/LMsQkiaEBRrdSfzS8',
+    phoneNumber: '04885285430',
+    whatsappNumber: '',
+  },
+  { 
+    id: '3', 
+    type: 'Bank',
+    name: 'South Indian Bank', 
+    place: 'Velur Post Office', 
+    mapLink: 'https://maps.app.goo.gl/DxhJbvqiNXHkBRPr5',
+    phoneNumber: '04885285430',
+    whatsappNumber: '',
+  },
 ];
 
 const Lawyer = () => {
   const [refreshing, setRefreshing] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('All');
   const [isMenuVisible, setIsMenuVisible] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [selectedProfileImage, setSelectedProfileImage] = useState('');
+  const [placeImages, setPlaceImages] = useState({});
   const navigation = useNavigation();
+
+  useEffect(() => {
+    // Fetch images for each place using the Unsplash API or any other suitable service
+    data.forEach((item) => {
+      fetchPlaceImage(item.mapLink, item.id);
+    });
+  }, []);
+
+  const fetchPlaceImage = async (mapLink, itemId) => {
+    try {
+      // Use a suitable API to fetch images for the given location (Unsplash API example)
+      const response = await fetch(`https://api.unsplash.com/photos/random?query=${mapLink}&count=1&client_id=YOUR_UNSPLASH_API_KEY`);
+      const data = await response.json();
+
+      if (data && data.length > 0) {
+        setPlaceImages((prevImages) => ({
+          ...prevImages,
+          [itemId]: data[0].urls.small,
+        }));
+      }
+    } catch (error) {
+      console.error('Error fetching image:', error);
+    }
+  };
 
   const handleRefresh = () => {
     setRefreshing(true);
@@ -25,119 +82,130 @@ const Lawyer = () => {
 
   const handleItemPress = (item) => {
     console.log(`Item ${item.id} pressed`);
-    setSelectedProfileImage(item.profileImage);
-    setModalVisible(true);
-  };
-
-  const handleCallPress = (item) => {
-    if (!item.phoneNumber) {
-      alert(`Phone number is not available for ${item.name}`);
-      return;
-    }
-
-    const formattedPhoneNumber = encodeURIComponent(item.phoneNumber.replace(/\s/g, ''));
-
-    Linking.canOpenURL(`tel:${formattedPhoneNumber}`).then((supported) => {
-      if (supported) {
-        Linking.openURL(`tel:${formattedPhoneNumber}`);
-      } else {
-        alert('Phone calls are not available on this device.');
-      }
-    });
-  };
-
-  const handleWhatsAppPress = (item) => {
-    if (!item.phoneNumber) {
-      alert(`Phone number is not available for ${item.name}`);
-      return;
-    }
-
-    const formattedPhoneNumber = encodeURIComponent(item.phoneNumber.replace(/\s/g, ''));
-
-    Linking.canOpenURL(`whatsapp://send?phone=${formattedPhoneNumber}`).then((supported) => {
-      if (supported) {
-        Linking.openURL(`whatsapp://send?phone=${formattedPhoneNumber}`);
-      } else {
-        alert('WhatsApp is not available on this device.');
-      }
-    });
+    // Remove redirection logic
   };
 
   const handleMapPress = (item) => {
     Linking.openURL(item.mapLink);
   };
 
-  const renderButtons = (item) => {
-    return (
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={() => handleCallPress(item)}>
-          <Ionicons name="call" size={24} color="black" />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => handleWhatsAppPress(item)}>
-          <Ionicons name="logo-whatsapp" size={24} color="black" />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => handleMapPress(item)}>
-          <Ionicons name="location-outline" size={24} color="black" />
-        </TouchableOpacity>
-      </View>
-    );
+  const handleCallPress = (phoneNumber) => {
+    if (!phoneNumber) {
+      Alert.alert('Phone number is not available.');
+      return;
+    }
+
+    const url = `tel:${phoneNumber}`;
+    Linking.canOpenURL(url)
+      .then((supported) => {
+        if (supported) {
+          Linking.openURL(url);
+        } else {
+          Alert.alert('Unfortunately, the phone number cannot be called.');
+        }
+      })
+      .catch((error) => console.error('Error opening phone app:', error));
+  };
+
+  const handleWhatsAppPress = (whatsappNumber) => {
+    if (!whatsappNumber) {
+      Alert.alert('WhatsApp number is not available.');
+      return;
+    }
+
+    const url = `whatsapp://send?phone=${whatsappNumber}`;
+    Linking.canOpenURL(url)
+      .then((supported) => {
+        if (supported) {
+          Linking.openURL(url);
+        } else {
+          Alert.alert('Unfortunately, WhatsApp is not available.');
+        }
+      })
+      .catch((error) => console.error('Error opening WhatsApp:', error));
   };
 
   const handleMorePress = () => {
     setIsMenuVisible(!isMenuVisible);
   };
 
+  const handleDropdownChange = (value) => {
+    setSelectedCategory(value);
+  };
+
   const renderMenu = () => {
     if (isMenuVisible) {
       return (
         <View style={styles.menuContainer}>
-          <TouchableOpacity style={styles.menuOption} onPress={() => alert('Website pressed')}>
-            <Text>Website</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.menuOption} onPress={() => alert('Treatments pressed')}>
-            <Text>Treatments</Text>
-          </TouchableOpacity>
-          {/* Add more menu options as needed */}
+          <Picker
+            selectedValue={selectedCategory}
+            onValueChange={(itemValue) => handleDropdownChange(itemValue)}
+          >
+            <Picker.Item label="All" value="All" />
+            <Picker.Item label="ATM" value="ATM" />
+            <Picker.Item label="Bank" value="Bank" />
+          </Picker>
         </View>
       );
     }
     return null;
   };
 
-  const renderItem = ({ item, index }) => {
-    // Check if the item is 'Kotakkal Arya Vaidya Shala'
-    const isKotakkalAryaVaidyaShala = item.id === '1';
+  const filteredData = data.filter((item) => {
+    if (selectedCategory === 'All') {
+      return true;
+    } else {
+      return item.type === selectedCategory;
+    }
+  });
 
+  const renderItem = ({ item }) => {
     return (
       <TouchableOpacity
         style={styles.itemContainer}
         onPress={() => handleItemPress(item)}
       >
-        <Image source={{ uri: item.profileImage }} style={styles.profileImage} />
+        <View style={styles.imageContainer}>
+          {placeImages[item.id] && (
+            <Image
+              style={styles.profilePic}
+              source={{ uri: placeImages[item.id] }}
+            />
+          )}
+        </View>
         <View style={styles.textContainer}>
           <Text style={styles.itemText}>{item.name}</Text>
-          <Text style={styles.subText}>{`Category: ${item.category}`}</Text>
-          <Text style={styles.subText}>{`Place: ${item.place}, Rating: ${item.rating}`}</Text>
+          <Text style={styles.subText}>{`Place: ${item.place}`}</Text>
+          <Text style={styles.subText}>{`Type: ${item.type}`}</Text>
         </View>
-        {renderButtons(item)}
-        {/* Check if it's not 'Kotakkal Arya Vaidya Shala' and render the menu icon */}
-        {index === data.length - 1 && !isKotakkalAryaVaidyaShala && (
-          <TouchableOpacity
-            style={styles.button}
-            onPress={handleMorePress}
-          >
-            <Ionicons name="ellipsis-vertical" size={24} color="black" />
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={() => handleMapPress(item)}>
+            <Ionicons name="location-outline" size={24} color="black" />
           </TouchableOpacity>
-        )}
-        {index === data.length - 1 && index > 1 && renderMenu()}
+          {item.type !== 'BOI ATM' && (
+            <TouchableOpacity style={styles.button} onPress={() => handleCallPress(item.phoneNumber)}>
+              <Ionicons name="call-outline" size={24} color="black" />
+            </TouchableOpacity>
+          )}
+          {item.type !== 'BOI ATM' && item.type !== 'SBI ATM' && (
+            <TouchableOpacity style={styles.button} onPress={() => handleWhatsAppPress(item.whatsappNumber)}>
+              <Ionicons name="logo-whatsapp" size={24} color="green" />
+            </TouchableOpacity>
+          )}
+        </View>
+        {renderMenu()}
       </TouchableOpacity>
     );
   };
 
   return (
     <View style={styles.container}>
+      <View style={styles.buttonContainer}>
+        <Button title="ATM" onPress={() => handleDropdownChange("ATM")} />
+        <Button title="Bank" onPress={() => handleDropdownChange("Bank")} />
+      </View>
       <FlatList
-        data={data}
+        data={filteredData}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
         refreshing={refreshing}
@@ -145,22 +213,6 @@ const Lawyer = () => {
         contentContainerStyle={styles.listContainer}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}
       />
-      <Modal
-        animationType="slide"
-        transparent={false}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(false);
-        }}
-      >
-        <View style={styles.modalContainer}>
-          <Image source={{ uri: selectedProfileImage }} style={styles.modalProfileImage} />
-          {/* You can add more details or actions in the modal if needed */}
-          <TouchableOpacity onPress={() => setModalVisible(false)}>
-            <Text style={styles.modalCloseText}>Close</Text>
-          </TouchableOpacity>
-        </View>
-      </Modal>
     </View>
   );
 };
@@ -188,6 +240,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+  imageContainer: {
+    marginRight: 10,
+  },
+  profilePic: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+  },
   textContainer: {
     flex: 1,
   },
@@ -201,7 +261,8 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
+    justifyContent: 'space-around',
+    marginVertical: 10,
   },
   button: {
     padding: 5,
@@ -219,31 +280,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 2,
     elevation: 3,
-  },
-  menuOption: {
-    paddingVertical: 5,
-  },
-  profileImage: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    marginRight: 10,
-  },
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  modalProfileImage: {
-    width: 200,
-    height: 200,
-    borderRadius: 100,
-    marginBottom: 20,
-  },
-  modalCloseText: {
-    fontSize: 18,
-    color: 'blue',
-    marginTop: 10,
   },
 });
 
