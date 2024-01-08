@@ -1,17 +1,32 @@
+// Vehicle.js
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-const HomeServ = () => {
+const VehicleScreen = () => {
+  const navigation = useNavigation();
+
   const serviceButtons = [
-    { label: 'Auto', value: 'auto', icon: 'ios-taxi-outline' },
-    { label: 'Taxi', value: 'taxi', icon: 'ios-car-outline' },
-    { label: 'Ambulance', value: 'ambulance', icon: 'ios-medical-outline' },
-    { label: 'Goods and Service', value: 'goodsandservice', icon: 'ios-bus-outline' }, 
+    // Replace 'ios-taxi-outline' with 'autoIcon' for the custom image
+    { label: 'Auto', value: 'auto', icon: require('../assets/travel.png') },
+    { label: 'Taxi', value: 'taxi', icon: require('../assets/taxi.png') },
+    { label: 'Ambulance', value: 'ambulance', icon: require('../assets/ambulance.png') },
+    { label: 'Goods and Service', value: 'goodsandservice', icon: require('../assets/delivery-truck.png') },
   ];
 
   const handleButtonPress = (item) => {
     console.log('Button pressed: ${item.label}');
+    if (item.value === 'ambulance') {
+      navigation.navigate('Ambulance');
+    } else if (item.value === 'taxi') {
+      navigation.navigate('Taxi');
+    } else if (item.value === 'auto') {
+      navigation.navigate('Auto');
+    } else if (item.value === 'goodsandservice') {
+      navigation.navigate('GoodsandService');
+    } else {
+      console.log('Button pressed: ${item.label}');
+    }
   };
 
   return (
@@ -29,8 +44,12 @@ const HomeServ = () => {
               style={styles.button}
               onPress={() => handleButtonPress(item)}
             >
-              <Icon name={item.icon} size={30} color="#001F3F" />
-
+              {/* Use Image component for custom image */}
+              {typeof item.icon === 'string' ? (
+                <Image source={{ uri: item.icon }} style={styles.customIcon} />
+              ) : (
+                <Image source={item.icon} style={styles.customIcon} />
+              )}
               <Text style={styles.buttonText}>{item.label}</Text>
             </TouchableOpacity>
           ))}
@@ -72,6 +91,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'rgba(255, 255, 255, 0.8)',
   },
+  customIcon: {
+    width: 50, // Adjust the width and height according to your image size
+    height: 50,
+    marginBottom: 8,
+  },
   buttonText: {
     fontSize: 16,
     fontWeight: 'bold',
@@ -79,4 +103,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeServ;
+export default VehicleScreen;

@@ -40,6 +40,15 @@ import Bank from './src/Bank'
 import Courier from './src/Courier'
 import Jobs from './src/Jobs'
 import Vetenary from './src/Vetenary'
+import Ambulance from './src/Ambulancescreen//Ambulance';
+import Abhishek from './src/Ambulancescreen//Abhishek';  // Import Abhishek screen
+import Taxi from './src/Ambulancescreen/Taxi';  // Import Taxi screen
+import Angel from './src/Ambulancescreen/Angel';
+import Auto from './src/Ambulancescreen/Auto' ;
+import GoodsandService from './src/Ambulancescreen/GoodsandService' ;
+import Sundru from './src/Ambulancescreen/Sundru' ;
+import Arjun from './src/Ambulancescreen/Arjun' ;
+
 
 const Stack = createStackNavigator();
 
@@ -233,6 +242,47 @@ const App = () => {
             component={Vetenary}
             options={{ title: 'Agriculture & Vetenary Offices' }}
           />
+          <Stack.Screen  
+            name="Ambulance"
+            component={Ambulance}
+            options={{ title: 'Ambulance' }}            
+          />
+          <Stack.Screen
+            name="Abhishek"
+            component={Abhishek}
+            options={{ title: 'Abhishek' }}  // Specify the title for Abhishek screen
+          />
+            <Stack.Screen
+            name="Taxi"
+            component={Taxi}
+            options={{ title: 'Taxi' }}  // Specify the title for Taxi screen
+            />
+            <Stack.Screen
+            name="Angel"
+            component={Angel}
+            options={{ title: 'Angel' }}
+          />
+            <Stack.Screen
+            name="Auto"
+            component={Auto}
+            options={{ title: 'Auto' }}
+          />           
+           <Stack.Screen
+            name="GoodsandService"
+            component={GoodsandService}
+            options={{ title: 'GoodsandService' }}
+          /> 
+            <Stack.Screen
+            name="Sundru"
+            component={Sundru}
+            options={{ title: 'Sundru' }}
+          />     
+            <Stack.Screen
+            name="Arjun"
+            component={Arjun}
+            options={{ title: 'Arjun' }}
+          />           
+
           {/* Add other screens here */}
         </Stack.Navigator>
       </NavigationContainer>
