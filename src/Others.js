@@ -12,17 +12,17 @@ const Others = () => {
     { label: 'KSFE', value: 'ksfe', link: 'https://ksfeonline.com/payment', icon: 'ios-cash-outline' },
     { label: 'Akshaya Govt.', value: 'akshayaGovt', link: 'http://www.akshaya.kerala.gov.in/', icon: 'ios-globe-outline' },
     { label: 'Post Office', value: 'postOffice', link: 'https://www.indiapost.gov.in/', icon: 'ios-mail-outline' },
-    { label: 'Courier', value: 'courier', link: 'https://www.dhl.com/', icon: 'ios-archive-outline' },
-    { label: 'Bank', value: 'bank', link: 'https://www.rbi.org.in/', icon: 'ios-briefcase-outline' },
+    { label: 'Courier', value: 'courier', icon: 'ios-archive-outline' },
+    { label: 'Bank', value: 'bank', icon: 'card-outline' },
     { label: 'Hospital', value: 'hospital', icon: 'ios-medkit-outline' },
     { label: 'Edu. Instit.', value: 'eduInstitute', link: 'https://education.kerala.gov.in/', icon: 'ios-book-outline' },
     { label: 'Online Shops', value: 'shops', link: 'https://www.amazon.in/', icon: 'ios-cart-outline' },
     { label: 'Medical Store', value: 'medicalStore', icon: 'ios-medical-outline' },
     { label: 'Religious Place', value: 'religiousPlaces', icon: 'ios-star-outline' },
     { label: 'Hotels', value: 'hotels', link: 'http://tinyurl.com/363e2vau', icon: 'ios-bed-outline' },
-    { label: 'Jobs', value: 'jobVacancies', link: 'https://www.google.com/about/careers/applications/jobs/results/?location=India', icon: 'ios-briefcase-outline' },
-    { label: 'Media', value: 'media', link: 'https://www.manoramaonline.com/', icon: 'ios-newspaper-outline' },
-    { label: 'Agri/Vet Offices', value: 'agriVetOffices', link: 'http://tinyurl.com/agrivetoffices', icon: 'ios-leaf-outline' },
+    { label: 'Jobs', value: 'jobVacancies', icon: 'ios-briefcase-outline' },
+    { label: 'Media', value: 'media', link: 'https://cctvonline.tv/',  icon: 'ios-newspaper-outline' },
+    { label: 'Agri/Vet Offices', value: 'agriVetOffices', icon: 'ios-leaf-outline' },
     { label: 'Food', value: 'restaurants', link: 'http://tinyurl.com/bdvuw2hj', icon: 'ios-restaurant-outline' },
   ];
 
@@ -41,6 +41,18 @@ const Others = () => {
     }
     if (item.value === 'religiousPlaces') {
       navigation.navigate('ReligiousPlace');
+    }
+    if (item.value === 'bank') {
+      navigation.navigate('Banks')
+    }
+    if (item.value === 'courier') {
+      navigation.navigate('Courier')
+    }
+    if (item.value === 'jobVacancies') {
+      navigation.navigate('Jobs')
+    }
+    if (item.value === 'agriVetOffices') {
+      navigation.navigate('Agriculture Ventenary Offices')
     }
   };
 
